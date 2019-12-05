@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using TransforMe.DataAccess.Factory;
 using TransforMe.DataAccess.Utilities;
 using TransforMe.Interface;
 using TransforMe.Interface.Contexts;
@@ -13,7 +14,7 @@ namespace TransforMe.DataAccess
     {
         public bool Create(IActivity activity, int userId)
         {
-            using MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString);
+            using MySqlConnection conn = MySqlConnectionFactory.CreateConnection();
             MySqlCommand cmd = new MySqlCommand("spAddActivity", conn);
             conn.Open();
             cmd.CommandType = CommandType.StoredProcedure;

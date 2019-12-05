@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data;
+using TransforMe.DataAccess.Factory;
 using TransforMe.DataAccess.Models;
 using TransforMe.DataAccess.Utilities;
 using TransforMe.Interface;
@@ -13,7 +14,7 @@ namespace TransforMe.DataAccess
     {
         public bool Create(IUser user)
         {
-            using MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString);
+            using MySqlConnection conn = MySqlConnectionFactory.CreateConnection();
             MySqlCommand cmd = new MySqlCommand("spAddUser", conn);
             conn.Open();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -38,7 +39,7 @@ namespace TransforMe.DataAccess
 
         public IUser Get(int id)
         {
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("spGetUserById", conn);
                 conn.Open();
@@ -72,7 +73,7 @@ namespace TransforMe.DataAccess
 
         public IUser Get(string username)
         {
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("spGetUserByUsername", conn);
                 conn.Open();
@@ -106,7 +107,7 @@ namespace TransforMe.DataAccess
 
         public IEnumerable<IUser> GetAll()
         {
-            using MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString);
+            using MySqlConnection conn = MySqlConnectionFactory.CreateConnection();
             MySqlCommand cmd = new MySqlCommand("spGetAllUsers", conn);
             conn.Open();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -145,7 +146,7 @@ namespace TransforMe.DataAccess
 
         public int GetFollowersAmount(int userId)
         {
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) AS followers FROM user_follower WHERE user_id = '" + userId + "';", conn);
                 conn.Open();
@@ -163,7 +164,7 @@ namespace TransforMe.DataAccess
 
         public int GetFollowingsAmount(int userId)
         {
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) AS followings FROM user_follower WHERE follower_id = '" + userId + "';", conn);
                 conn.Open();
@@ -183,7 +184,7 @@ namespace TransforMe.DataAccess
         {
             List<string> returnQuestions = new List<string>();
             string question = "";
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM securityquestions", conn);
                 conn.Open();

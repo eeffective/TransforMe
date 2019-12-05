@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using TransforMe.DataAccess.Factory;
 using TransforMe.DataAccess.Models;
 using TransforMe.DataAccess.Utilities;
 using TransforMe.Interface;
@@ -15,7 +16,7 @@ namespace TransforMe.DataAccess
     {
         public bool Create(IMessage message, int userId)
         {
-            using MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString);
+            using MySqlConnection conn = MySqlConnectionFactory.CreateConnection();
             MySqlCommand cmd = new MySqlCommand("spAddMessage", conn);
             conn.Open();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -46,7 +47,7 @@ namespace TransforMe.DataAccess
 
         public IEnumerable<IMessage> GetAllByUserId(int userId)
         {
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("spGetMessagesByUserId", conn);
                 conn.Open();
@@ -78,7 +79,7 @@ namespace TransforMe.DataAccess
 
         public IEnumerable<IMessage> GetAllFromFollowings(int userId)
         {
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("spGetMessagesFromFollowingsById", conn);
                 conn.Open();

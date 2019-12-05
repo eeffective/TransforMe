@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+using TransforMe.DataAccess.Factory;
 using TransforMe.DataAccess.Models;
 using TransforMe.DataAccess.Utilities;
 using TransforMe.Interface;
@@ -14,7 +15,7 @@ namespace TransforMe.DataAccess
     {
         public bool Create(IProgression progression, int userId)
         {
-            using MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString);
+            using MySqlConnection conn = MySqlConnectionFactory.CreateConnection();
             MySqlCommand cmd = new MySqlCommand("spAddProgression", conn);
             conn.Open();
             cmd.CommandType = CommandType.StoredProcedure;
@@ -46,7 +47,7 @@ namespace TransforMe.DataAccess
 
         public IEnumerable<IProgression> GetAll(int userId)
         {
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("spGetProgressionsByUserId", conn);
                 conn.Open();
@@ -74,7 +75,7 @@ namespace TransforMe.DataAccess
 
         public IEnumerable<IProgression> GetAllFromFollowings(int userId)
         {
-            using (MySqlConnection conn = new MySqlConnection(ConnectionUtility.MySqlConnectionString))
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("spGetProgressionsFromFollowingsById", conn);
                 conn.Open();
