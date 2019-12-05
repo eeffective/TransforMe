@@ -1,0 +1,13 @@
+﻿@model TransforMe.ViewModels.MessageViewModel
+@using TransforMe.Interface.Logics
+@using TransforMe.BLLFactory
+
+@{
+    IUserLogic userLogic = TransforMe.BLLFactory.LogicFactory.CreateUserLogic();
+}
+<a href="@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id })">
+    <img class="postimage" src="@Url.Content(Model.Image)" alt="This is a profile picture.">
+</a>
+<h1 style="font-size: 20px;padding-top: 2%;">@Model.Username</h1>
+<p class="d-xl-flex justify-content-xl-start">@Model.Text</p>
+<small style="padding-right:2%;" class="d-xl-flex justify-content-xl-end">@Model.PostedAt</small>

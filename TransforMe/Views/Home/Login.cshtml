@@ -1,0 +1,31 @@
+﻿@model TransforMe.ViewModels.LoginViewModel
+
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Views/Shared/_VisitorLayout.cshtml";
+}
+
+
+<div class="register-photo" style="background-color: rgba(241,247,252,0);padding-top: 10%;">
+    <div class="form-container">
+        <div class="image-holder" style="background-image: url(&quot;assets/img/meghan-holmes-buWcS7G1_28-unsplash.jpg&quot;);"></div>
+        <form method="post" asp-action="Login">
+            <h2 class="text-center">TransforMe - Sign in</h2>
+            <div class="form-group">
+                <input asp-for="Username" class="form-control username-input" type="text" placeholder="Username">
+                <span asp-validation-for="Username" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" type="password" name="password" placeholder="Password">
+                <span asp-validation-for="Password" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">Sign in</button>
+            </div><a class="already" asp-action="Register" asp-controller="Home">You don't have an account yet? Sign up here!</a>
+        </form>
+    </div>
+</div>
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

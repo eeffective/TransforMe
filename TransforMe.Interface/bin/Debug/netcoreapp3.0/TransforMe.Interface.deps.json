@@ -1,0 +1,23 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v3.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v3.0": {
+      "TransforMe.Interface/1.0.0": {
+        "runtime": {
+          "TransforMe.Interface.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "TransforMe.Interface/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -1,0 +1,42 @@
+﻿@model TransforMe.ViewModels.RegisterViewModel
+
+
+<div class="form-container">
+    <form method="post" asp-action="Register">
+        <h2 class="text-center">TransforMe - Sign up</h2>
+        <div class="form-group">
+            <input required asp-for="Firstname" class="form-control username-input" type="text" placeholder="First name">
+        </div>
+        <div class="form-group">
+            <input required asp-for="Lastname" class="form-control username-input" type="text" placeholder="Last name">
+        </div>
+        <div class="form-group">
+            <input required asp-for="Username" class="form-control username-input" type="text" placeholder="Username">
+        </div>
+        <div class="form-group">
+            <input required asp-for="Password" class="form-control" type="password" name="password" placeholder="Password">
+        </div>
+        <div class="form-group">
+            <input required class="form-control" type="password" name="password" placeholder="Repeat password">
+        </div>
+        <div class="form-group">
+            @{int value = 1; }
+            <select required class="form-control">
+                <optgroup label="Security questions">
+                    @foreach (var question in Model.SecurityQuestions)
+                    {
+                        <option value="@value">@question</option>
+                        value++;
+                    }
+                </optgroup>
+            </select>
+        </div>
+        <div class="form-group">
+            <input required asp-for="SecurityAnswer" class="form-control username-input" type="text" placeholder="Security answer">
+        </div>
+        <div class="form-group">
+            <button class="btn btn-primary btn-block" type="submit">Sign up</button>
+        </div><a class="already" asp-controller="Home" asp-action="Login">Already have an account? Sign in here!</a>
+    </form>
+</div>
+@*</div>*@

@@ -1,0 +1,55 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29411.108
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransforMe.Interface", "TransforMe.Interface\TransforMe.Interface.csproj", "{F9610EAA-62D9-4BC3-8963-73E300FFD18E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransforMe.DataAccess", "TransforMe.DataAccess\TransforMe.DataAccess.csproj", "{B1F1316B-B258-4E46-8922-49A35EA9F029}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransforMe.BusinessLogic", "TransforMe.BusinessLogic\TransforMe.BusinessLogic.csproj", "{45F6B54F-3D6D-4CDB-8F90-5937CF802833}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransforMe.BLLFactory", "TransforMe.BLLFactory\TransforMe.BLLFactory.csproj", "{265D692E-B55C-41BD-8B18-8324C78B309F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransforMe", "TransforMe\TransforMe.csproj", "{F63C33D4-451D-4E60-9633-2210F79FCDD7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TransforMe.DALFactory", "TransforMe.DALFactory\TransforMe.DALFactory.csproj", "{7F2681AA-18A0-44B8-A785-1F903D316C1C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F9610EAA-62D9-4BC3-8963-73E300FFD18E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F9610EAA-62D9-4BC3-8963-73E300FFD18E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F9610EAA-62D9-4BC3-8963-73E300FFD18E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F9610EAA-62D9-4BC3-8963-73E300FFD18E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1F1316B-B258-4E46-8922-49A35EA9F029}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1F1316B-B258-4E46-8922-49A35EA9F029}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1F1316B-B258-4E46-8922-49A35EA9F029}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1F1316B-B258-4E46-8922-49A35EA9F029}.Release|Any CPU.Build.0 = Release|Any CPU
+		{45F6B54F-3D6D-4CDB-8F90-5937CF802833}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{45F6B54F-3D6D-4CDB-8F90-5937CF802833}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{45F6B54F-3D6D-4CDB-8F90-5937CF802833}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{45F6B54F-3D6D-4CDB-8F90-5937CF802833}.Release|Any CPU.Build.0 = Release|Any CPU
+		{265D692E-B55C-41BD-8B18-8324C78B309F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{265D692E-B55C-41BD-8B18-8324C78B309F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{265D692E-B55C-41BD-8B18-8324C78B309F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{265D692E-B55C-41BD-8B18-8324C78B309F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F63C33D4-451D-4E60-9633-2210F79FCDD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F63C33D4-451D-4E60-9633-2210F79FCDD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F63C33D4-451D-4E60-9633-2210F79FCDD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F63C33D4-451D-4E60-9633-2210F79FCDD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7F2681AA-18A0-44B8-A785-1F903D316C1C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7F2681AA-18A0-44B8-A785-1F903D316C1C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7F2681AA-18A0-44B8-A785-1F903D316C1C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7F2681AA-18A0-44B8-A785-1F903D316C1C}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {CA6F4C3C-5F19-4F1F-83F8-AB757A6B15CF}
+	EndGlobalSection
+EndGlobal

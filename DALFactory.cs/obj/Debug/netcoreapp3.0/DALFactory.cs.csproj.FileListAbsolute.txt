@@ -1,0 +1,13 @@
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\bin\Debug\netcoreapp3.0\DALFactory.cs.deps.json
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\bin\Debug\netcoreapp3.0\DALFactory.cs.dll
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\bin\Debug\netcoreapp3.0\DALFactory.cs.pdb
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\bin\Debug\netcoreapp3.0\TransforMe.DataAccess.dll
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\bin\Debug\netcoreapp3.0\TransforMe.Interface.dll
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\bin\Debug\netcoreapp3.0\TransforMe.DataAccess.pdb
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\bin\Debug\netcoreapp3.0\TransforMe.Interface.pdb
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\obj\Debug\netcoreapp3.0\DALFactory.cs.csprojAssemblyReference.cache
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\obj\Debug\netcoreapp3.0\DALFactory.cs.AssemblyInfoInputs.cache
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\obj\Debug\netcoreapp3.0\DALFactory.cs.AssemblyInfo.cs
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\obj\Debug\netcoreapp3.0\DALFactory.cs.csproj.CopyComplete
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\obj\Debug\netcoreapp3.0\DALFactory.cs.dll
+C:\Users\efali\Desktop\TransforMe\TransforMe\DALFactory.cs\obj\Debug\netcoreapp3.0\DALFactory.cs.pdb
