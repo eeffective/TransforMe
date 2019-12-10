@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using TransforMe.BLLFactory;
@@ -12,6 +13,7 @@ using TransforMe.ViewModels;
 
 namespace TransforMe.Controllers
 {
+    //[Authorize(Roles = "1")]
     public class UserController : Controller
     {
         private readonly IUserLogic userLogic = LogicFactory.CreateUserLogic();

@@ -183,7 +183,6 @@ namespace TransforMe.DataAccess
         public List<string> GetAllQuestions()
         {
             List<string> returnQuestions = new List<string>();
-            string question = "";
             using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
                 MySqlCommand cmd = new MySqlCommand("SELECT * FROM securityquestions", conn);
@@ -194,11 +193,49 @@ namespace TransforMe.DataAccess
 
                 while (dataReader.Read())
                 {
-                    question = dataReader["question"].ToString();
+                    string question = dataReader["question"].ToString();
                     returnQuestions.Add(question);
                 }
 
                 return returnQuestions;
+            }
+        }
+
+        public bool DoIFollowUser(int userId, int followerId)
+        {
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) AS isFollowing FROM user_follower WHERE user_id = '" + followerId + "' and follower_id = '" + userId + "';", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    return dataReader.GetInt32("followings") > 0;
+
+                }
+                return false;
+            }
+        }
+
+        public int GetQuestionId(string question)
+        {
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM securityquestions WHERE question = @question", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    int id = Convert.ToInt32(dataReader["id"]);
+                    return id;
+                }
+                return -1;
             }
         }
     }

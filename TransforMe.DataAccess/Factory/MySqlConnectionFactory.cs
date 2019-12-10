@@ -9,5 +9,6 @@ namespace TransforMe.DataAccess.Factory
     public static class MySqlConnectionFactory
     {
         public static MySqlConnection CreateConnection() => new MySqlConnection(ConnectionUtility.MySqlConnectionString);
+
     }
 }

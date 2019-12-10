@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using TransforMe.Interface.Logics;
+@using TransforMe.BLLFactory;
+<!DOCTYPE html>
 <html style="background-color:white;">
 
 <head>
@@ -20,13 +22,17 @@
     <link href="~/css/cardgroupshadow.css" rel="stylesheet" />
     <link href="~/css/alertify.min.css" rel="stylesheet" />
 </head>
+@{ 
+    IUserLogic userLogic = LogicFactory.CreateUserLogic();
+    var currentUser = userLogic.GetUser(User.Identity.Name);
+}
 
 <body class="bodytransforme">
     <div class="row" style="margin-top: 2%;width: 100%;">
         <div class="col leftcol">
             <div class="text-center box">
                 <img class="rounded-circle" src="@Url.Content(ViewData["profilepic"].ToString())" style="width: 150px;max-width: 100%;">
-                <h3 class="name">@ViewData["firstname"] @ViewData["lastname"]</h3>
+                <h3 class="name">@currentUser.Firstname @currentUser.Lastname</h3>
                 <p class="title" style="font-size: 12px;">@ViewData["followers"] FOLLOWERS | @TempData["followings"] FOLLOWING</p>
             </div>
             <div>
