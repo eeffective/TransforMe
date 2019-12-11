@@ -13,7 +13,7 @@ using TransforMe.ViewModels;
 
 namespace TransforMe.Controllers
 {
-    //[Authorize(Roles = "1")]
+    [Authorize(Roles = "1")]
     public class UserController : Controller
     {
         private readonly IUserLogic userLogic = LogicFactory.CreateUserLogic();
