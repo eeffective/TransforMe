@@ -224,7 +224,7 @@ namespace TransforMe.DataAccess
         {
             using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT * FROM securityquestions WHERE question = @question", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT * FROM securityquestions WHERE question = '" + question + "'", conn);
                 conn.Open();
                 cmd.CommandType = CommandType.Text;
 

@@ -21,24 +21,20 @@ namespace TransforMe.ViewModels
         public string Username { get; set; }
 
         [Required(ErrorMessage = "This can't be empty.")]
-        [DataType(DataType.Password)]
         [StringLength(20, ErrorMessage = "The password must be at least 8 characters long.", MinimumLength = 8)]
         [Display(Name = "Password")]
         public string Password { get; set; }
 
-        [Compare(nameof(Password), ErrorMessage = "Your password doesn't match.")]
         [Display(Name = "Confirm password")]
         public string ConfirmPassword { get; set; }
 
-        [Required(ErrorMessage = "This can't be empty.")]
         [Display(Name = "Security question")]
-        public int SecurityQuestion { get; set; }
+        public string SecurityQuestion { get; set; }
 
         [Required(ErrorMessage = "This can't be empty.")]
         [Display(Name = "Security answer")]
         public string SecurityAnswer { get; set; }
 
-        public List<string> SecurityQuestions { get; set; }
 
     }
 }

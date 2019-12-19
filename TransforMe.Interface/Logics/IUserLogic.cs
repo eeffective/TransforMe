@@ -22,5 +22,6 @@ namespace TransforMe.Interface.Logics
         int GetFollowersAmount(int userId);
         int GetFollowingAmount(int userId);
         List<string> GetAllQuestions();
+        int GetQuestionId(string question);
     }
 }

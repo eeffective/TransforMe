@@ -46,10 +46,10 @@ namespace TransforMe.BusinessLogic
 
         public bool Register(IUser user)
         {
-            string defaultProfilePicture = @"C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\TransforMe\wwwroot\images\defaultprofilepicture.jpg";
-            var imageToByte = File.ReadAllBytes(defaultProfilePicture);
+            //    string defaultProfilePicture = @"~\wwwroot\images\defaultprofilepicture.jpg";
+            //    var imageToByte = File.ReadAllBytes(defaultProfilePicture);
 
-            user.ProfilePicture = imageToByte;
+            //user.ProfilePicture = imageToByte;
             user.ActiveState = 1;
             user.AccountType = "Public";
             user.Role = 1;
@@ -92,5 +92,6 @@ namespace TransforMe.BusinessLogic
         public IEnumerable<IProgression> GetProgressionsByUserId(int userId) => progressionContext.GetAll(userId);
 
         public List<string> GetAllQuestions() => userContext.GetAllQuestions();
+        public int GetQuestionId(string question) => userContext.GetQuestionId(question);
     }
 }

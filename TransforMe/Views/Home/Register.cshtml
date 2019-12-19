@@ -1,42 +1,48 @@
 ﻿@model TransforMe.ViewModels.RegisterViewModel
 
+@{
+    Layout = "~/Views/Shared/_VisitorLayout.cshtml";
+}
 
 <div class="form-container">
-    <form method="post" asp-action="Register">
+    <form method="post" asp-action="Register" asp-controller="Home">
         <h2 class="text-center">TransforMe - Sign up</h2>
         <div class="form-group">
             <input required asp-for="Firstname" class="form-control username-input" type="text" placeholder="First name">
+            <span class="badge-danger" asp-validation-for="Firstname"></span>
         </div>
         <div class="form-group">
             <input required asp-for="Lastname" class="form-control username-input" type="text" placeholder="Last name">
+            <span class="badge-danger" asp-validation-for="Lastname"></span>
         </div>
         <div class="form-group">
             <input required asp-for="Username" class="form-control username-input" type="text" placeholder="Username">
+            <span class="badge-danger" asp-validation-for="Username"></span>
         </div>
         <div class="form-group">
-            <input required asp-for="Password" class="form-control" type="password" name="password" placeholder="Password">
+            <input required asp-for="Password" class="form-control" type="password" placeholder="Password">
+            <span class="badge-danger" asp-validation-for="Password"></span>
         </div>
         <div class="form-group">
-            <input required class="form-control" type="password" name="password" placeholder="Repeat password">
+            <input required class="form-control" type="password" name="confirmpassword" placeholder="Repeat password">
         </div>
         <div class="form-group">
-            @{int value = 1; }
-            <select required class="form-control">
+            <select asp-for="SecurityQuestion" required class="form-control">
                 <optgroup label="Security questions">
-                    @foreach (var question in Model.SecurityQuestions)
+                    @foreach (var question in ViewBag.SecurityQuestions)
                     {
-                        <option value="@value">@question</option>
-                        value++;
+                        <option>@question</option>
                     }
                 </optgroup>
             </select>
         </div>
         <div class="form-group">
             <input required asp-for="SecurityAnswer" class="form-control username-input" type="text" placeholder="Security answer">
+            <span class="badge-danger" asp-validation-for="SecurityAnswer"></span>
         </div>
+        <div asp-validation-summary="ModelOnly"></div>
         <div class="form-group">
             <button class="btn btn-primary btn-block" type="submit">Sign up</button>
         </div><a class="already" asp-controller="Home" asp-action="Login">Already have an account? Sign in here!</a>
     </form>
 </div>
-@*</div>*@

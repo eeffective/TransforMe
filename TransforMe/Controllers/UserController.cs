@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -13,7 +14,6 @@ using TransforMe.ViewModels;
 
 namespace TransforMe.Controllers
 {
-    [Authorize(Roles = "1")]
     public class UserController : Controller
     {
         private readonly IUserLogic userLogic = LogicFactory.CreateUserLogic();
@@ -182,6 +182,7 @@ namespace TransforMe.Controllers
             {
                 return View();
             }
+            
             IActivity newActivity = ModelFactory.CreateActivity();
             {
                 newActivity.Description = viewModel.Description;
@@ -246,5 +247,10 @@ namespace TransforMe.Controllers
             return View(viewModel);
         }
 
+        public async Task<IActionResult> SignOut()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Login", "Home");
+        }
     }
 }

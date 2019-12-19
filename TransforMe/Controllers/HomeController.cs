@@ -64,32 +64,27 @@ namespace TransforMe.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            RegisterViewModel viewModel = new RegisterViewModel();
-            {
-                viewModel.SecurityQuestions = new List<string>();
-            }
+            ViewBag.SecurityQuestions = userLogic.GetAllQuestions();
 
-            foreach (var question in userLogic.GetAllQuestions())
-            {
-                viewModel.SecurityQuestions.Add(question);
-            }
-
-            return View(viewModel);
+            return View();
         }
 
         [HttpPost]
         public IActionResult Register(RegisterViewModel viewModel)
         {
+            ViewBag.SecurityQuestions = userLogic.GetAllQuestions();
+
             if (viewModel.Firstname == viewModel.Lastname)
             {
-                ModelState.AddModelError("Last name", "Last name can't be the same as First name");
+                ModelState.AddModelError("Lastname", "Last name can't be the same as First name");
             }
 
+            // TODO: Find the error in the if-statement below
             if (!ModelState.IsValid)
             {
-                return View(viewModel);
+                TempData["error-feedback"] = "Registration failed!";
+                return View(new RegisterViewModel());
             }
-
 
             IUser newUser = ModelFactory.CreateUser();
             {
@@ -97,16 +92,22 @@ namespace TransforMe.Controllers
                 newUser.Lastname = viewModel.Lastname;
                 newUser.Username = viewModel.Username;
                 newUser.Password = viewModel.Password;
-                newUser.SecurityQuestion = viewModel.SecurityQuestions.Count;
+                newUser.SecurityQuestion = userLogic.GetQuestionId(viewModel.SecurityQuestion);
                 newUser.SecurityAnswer = viewModel.SecurityAnswer;
             }
 
             if (userLogic.Register(newUser))
             {
-                return RedirectToAction("Index", "Home");
+                TempData["success-feedback"] = $"{viewModel.Firstname} {viewModel.Lastname} succesfully registered!";
+                return RedirectToAction("Login", "Home");
+            }
+            else
+            {
+                TempData["error-feedback"] = "Registration failed!";
+                return View();
             }
 
-            return View();
+
         }
 
         [HttpGet]
