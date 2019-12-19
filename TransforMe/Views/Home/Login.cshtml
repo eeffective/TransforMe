@@ -11,7 +11,7 @@
         <form method="post" asp-action="Login">
             <h2 class="text-center">TransforMe - Sign in</h2>
             <div class="form-group">
-                <input asp-for="Username" class="form-control username-input" type="text" placeholder="Username">
+                <input asp-for="Username" class="form-control username-input" type="text" name="username" placeholder="Username">
                 <span asp-validation-for="Username" class="text-danger"></span>
             </div>
             <div class="form-group">
@@ -19,12 +19,26 @@
                 <span asp-validation-for="Password" class="text-danger"></span>
             </div>
             <div class="form-group">
-                <button class="btn btn-primary btn-block" type="submit">Sign in</button>
-            </div><a class="already" asp-action="Register" asp-controller="Home">You don't have an account yet? Sign up here!</a>
+                <button id="loginbtn" class="btn btn-primary btn-block" type="submit">Sign in</button>
+            </div><a name="noaccount" class="already" asp-action="Register" asp-controller="Home">You don't have an account yet? Sign up here!</a>
         </form>
     </div>
 </div>
 
-@*@section Scripts {
-        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-    }*@
+@section Scripts {
+    <script>
+        @if (TempData["success-feedback"] != null) {
+            @:alertify.success('@TempData["success-feedback"]');
+        }
+        @if (TempData["error-feedback"] != null)
+        {
+            @:alertify.error('@TempData["error-feedback"]');
+        }
+        @if (TempData["error-mbox"] != null)
+        {
+            @:var alert = alertify.alert('@TempData["error-mbox"]');
+            @:alert.set('Label', 'Got it!');
+            @:alert.show();
+        }
+    </script>
+}

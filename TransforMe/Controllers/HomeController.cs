@@ -58,6 +58,10 @@ namespace TransforMe.Controllers
                         return RedirectToAction("Index", "Admin");
                 }
             }
+            else
+            {
+                TempData["error-feedback"] = "Login failed, please try again.";
+            }
             return View(viewModel);
         }
 
@@ -83,7 +87,7 @@ namespace TransforMe.Controllers
             if (!ModelState.IsValid)
             {
                 TempData["error-feedback"] = "Registration failed!";
-                return View(new RegisterViewModel());
+                return View(viewModel);
             }
 
             IUser newUser = ModelFactory.CreateUser();
