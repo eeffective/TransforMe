@@ -204,20 +204,27 @@ namespace TransforMe.DataAccess
 
         public bool DoIFollowUser(int userId, int followerId)
         {
+            int result = 0;
             using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
             {
-                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) AS isFollowing FROM user_follower WHERE user_id = '" + followerId + "' and follower_id = '" + userId + "';", conn);
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) AS isFollowing FROM user_follower WHERE user_id = '" + userId + "' and follower_id = '" + followerId + "';", conn);
                 conn.Open();
                 cmd.CommandType = CommandType.Text;
 
                 MySqlDataReader dataReader = cmd.ExecuteReader();
 
-                if (dataReader.Read())
+                while (dataReader.Read())
                 {
-                    return dataReader.GetInt32("isFollowing") > 0;
-
+                    result = Convert.ToInt32(dataReader["isFollowing"]);
                 }
                 conn.Close();
+            }
+            if (result == 1)
+            {
+                return true;
+            }
+            else
+            {
                 return false;
             }
         }

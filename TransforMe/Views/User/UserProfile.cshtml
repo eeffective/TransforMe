@@ -8,18 +8,7 @@
 
 @{
     TempData["userId"] = Model.Id;
-
     var currentUser = userLogic.GetUser(User.Identity.Name);
-    string followbtn;
-
-    if (userLogic.IsFollowing(userLogic.GetUser(Model.Username).Id, currentUser.Id))
-    {
-        followbtn = "UNFOLLOW";
-    }
-    else
-    {
-        followbtn = "FOLLOW";
-    }
 }
 
 <div class="col midcol" style="width: auto;">
@@ -31,7 +20,7 @@
             @if (currentUser.Id != Model.Id)
             {
                 <div class="btn-group" role="group">
-                    <button asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, followerId = currentUser.Id })'" class="btn btn-primary" type="submit">@followbtn.ToString()</button>
+                    <button asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, followerId = currentUser.Id })'" class="btn btn-primary" type="submit">@TempData["followstatus"].ToString()</button>
                     <button class="btn btn-primary" type="button">LIKE&nbsp;</button>
                 </div>
             }

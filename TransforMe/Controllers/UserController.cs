@@ -208,6 +208,7 @@ namespace TransforMe.Controllers
             ViewData["profilepic"] = currentProfilepicture;
             ViewData["followers"] = userLogic.GetFollowersAmount(currentUser.Id);
             ViewData["followings"] = userLogic.GetFollowingAmount(currentUser.Id);
+            TempData["followstatus"] = "FOLLOW";
 
             ProfileViewModel viewModel = new ProfileViewModel();
             {
@@ -220,6 +221,11 @@ namespace TransforMe.Controllers
                 viewModel.ProfilePicture = profileProfilePicture;
                 viewModel.Messages = new List<MessageViewModel>();
                 viewModel.Progressions = new List<ProgressionViewModel>();
+            }
+
+            if (userLogic.IsFollowing(viewModel.Id, currentUser.Id))
+            {
+                TempData["followstatus"] = "UNFOLLOW";
             }
 
             foreach (IMessage message in userLogic.GetMessagesByUserId(userId))
@@ -254,12 +260,15 @@ namespace TransforMe.Controllers
             var currentUser = userLogic.GetUser(User.Identity.Name);
             int followerId = currentUser.Id;
             int userId = (int)TempData["userId"];
-            ViewData["followstatus"] = null; 
+            ViewData["followstatus"] = null;
             if (!userLogic.IsFollowing(userId, followerId))
             {
                 ViewData["followstatus"] = "FOLLOW";
-                userLogic.Follow(userId, currentUser.Id);
-                TempData["success-feedback"] = "User followed succesfully!";
+                if (userLogic.Follow(userId, currentUser.Id))
+                {
+                    TempData["success-feedback"] = "User followed succesfully!";
+                }
+                return RedirectToAction("UserProfile", "User", new { userId });
             }
             else
             {
@@ -268,8 +277,6 @@ namespace TransforMe.Controllers
                 TempData["success-feedback"] = "User unfollowed succesfully!";
                 return RedirectToAction("Index", "User");
             }
-
-            return View(new ProfileViewModel());
         }
 
         public async Task<IActionResult> SearchUser(string searchInput)
@@ -280,7 +287,7 @@ namespace TransforMe.Controllers
             }
             else
             {
-                TempData["error-mbox"] = $"No user found with the userame {searchInput.Trim()}";
+                TempData["error-mbox"] = $"No user found with the username {searchInput.Trim()}";
                 return RedirectToAction("Index", "User");
             }
         }
