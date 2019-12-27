@@ -182,7 +182,7 @@ namespace TransforMe.Controllers
             {
                 return View();
             }
-            
+
             IActivity newActivity = ModelFactory.CreateActivity();
             {
                 newActivity.Description = viewModel.Description;
@@ -209,14 +209,15 @@ namespace TransforMe.Controllers
             ViewData["followers"] = userLogic.GetFollowersAmount(currentUser.Id);
             ViewData["followings"] = userLogic.GetFollowingAmount(currentUser.Id);
 
-            ViewData["profilefirstname"] = userLogic.GetUser(userId).Firstname;
-            ViewData["profilelastname"] = userLogic.GetUser(userId).Lastname;
-            ViewData["profilefollowers"] = userLogic.GetFollowersAmount(userId);
-            ViewData["profilefollowing"] = userLogic.GetFollowingAmount(userId);
-            ViewData["profileProfilepic"] = profileProfilePicture;
-
             ProfileViewModel viewModel = new ProfileViewModel();
             {
+                viewModel.Id = userLogic.GetUser(userId).Id;
+                viewModel.Firstname = userLogic.GetUser(userId).Firstname;
+                viewModel.Lastname = userLogic.GetUser(userId).Lastname;
+                viewModel.Username = userLogic.GetUser(userId).Username;
+                viewModel.Followers = userLogic.GetFollowersAmount(userId);
+                viewModel.Following = userLogic.GetFollowingAmount(userId);
+                viewModel.ProfilePicture = profileProfilePicture;
                 viewModel.Messages = new List<MessageViewModel>();
                 viewModel.Progressions = new List<ProgressionViewModel>();
             }
@@ -245,6 +246,43 @@ namespace TransforMe.Controllers
             }
 
             return View(viewModel);
+        }
+
+        [HttpPost]
+        public IActionResult UserProfile()
+        {
+            var currentUser = userLogic.GetUser(User.Identity.Name);
+            int followerId = currentUser.Id;
+            int userId = (int)TempData["userId"];
+            ViewData["followstatus"] = null; 
+            if (!userLogic.IsFollowing(userId, followerId))
+            {
+                ViewData["followstatus"] = "FOLLOW";
+                userLogic.Follow(userId, currentUser.Id);
+                TempData["success-feedback"] = "User followed succesfully!";
+            }
+            else
+            {
+                ViewData["followstatus"] = "UNFOLLOW";
+                userLogic.Unfollow(userId, followerId);
+                TempData["success-feedback"] = "User unfollowed succesfully!";
+                return RedirectToAction("Index", "User");
+            }
+
+            return View(new ProfileViewModel());
+        }
+
+        public async Task<IActionResult> SearchUser(string searchInput)
+        {
+            if (userLogic.GetUser(searchInput.Trim()) != null)
+            {
+                return RedirectToAction("UserProfile", "User", new { userId = userLogic.GetUser(searchInput).Id });
+            }
+            else
+            {
+                TempData["error-mbox"] = $"No user found with the userame {searchInput.Trim()}";
+                return RedirectToAction("Index", "User");
+            }
         }
 
         public async Task<IActionResult> SignOut()

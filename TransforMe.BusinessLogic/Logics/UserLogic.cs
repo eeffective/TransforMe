@@ -10,25 +10,31 @@ namespace TransforMe.BusinessLogic
 {
     public class UserLogic : IUserLogic
     {
-        private readonly IUserContext userContext = ContextFactory.CreateUserContext();
-        private readonly IMessageContext messageContext = ContextFactory.CreateMessageContext();
-        private readonly IProgressionContext progressionContext = ContextFactory.CreateProgressionContext();
-        private readonly IActivityContext activityContext = ContextFactory.CreateActivityContext();
+        private readonly IUserContext _userContext;
+        private readonly IMessageContext _messageContext;
+        private readonly IProgressionContext _progressionContext;
+        private readonly IActivityContext _activityContext;
 
+        public UserLogic()
+        {
+            _userContext = ContextFactory.CreateUserContext();
+            _messageContext = ContextFactory.CreateMessageContext();
+            _progressionContext = ContextFactory.CreateProgressionContext();
+            _activityContext = ContextFactory.CreateActivityContext();
+        }
         public bool PostMessage(IMessage message, int userId)
         {
             message.PostedAt = DateTime.Now;
-            if (messageContext.Create(message, userId))
+            if (_messageContext.Create(message, userId))
             {
                 return true;
             }
             return false;
-
         }
 
         public bool PostProgression(IProgression progression, int userId)
         {
-            if (progressionContext.Create(progression, userId))
+            if (_progressionContext.Create(progression, userId))
             {
                 return true;
             }
@@ -37,7 +43,7 @@ namespace TransforMe.BusinessLogic
 
         public bool PlanActivity(IActivity activity, int userId)
         {
-            if (activityContext.Create(activity, userId))
+            if (_activityContext.Create(activity, userId))
             {
                 return true;
             }
@@ -54,7 +60,7 @@ namespace TransforMe.BusinessLogic
             user.AccountType = "Public";
             user.Role = 1;
             user.DateOfCreation = DateTime.UtcNow;
-            if (userContext.Create(user))
+            if (_userContext.Create(user))
             {
                 return true;
             }
@@ -63,7 +69,7 @@ namespace TransforMe.BusinessLogic
 
         public bool ValidateLogin(string username, string password)
         {
-            IUser user = userContext.Get(username);
+            IUser user = _userContext.Get(username);
             if (user != null && user.Username == username && user.Password == password)
             {
                 return true;
@@ -71,27 +77,34 @@ namespace TransforMe.BusinessLogic
             return false;
         }
 
-        public int GetRole(string username) => userContext.Get(username).Role;
+        public int GetRole(string username) => _userContext.Get(username).Role;
 
-        public IUser GetUser(int userId) => userContext.Get(userId);
+        public IUser GetUser(int userId) => _userContext.Get(userId);
 
-        public IUser GetUser(string username) => userContext.Get(username);
+        public IUser GetUser(string username) => _userContext.Get(username);
 
-        public byte[] GetProfilePicture(int userId) => userContext.Get(userId).ProfilePicture;
+        public byte[] GetProfilePicture(int userId) => _userContext.Get(userId).ProfilePicture;
 
-        public IEnumerable<IMessage> GetFollowingsMessages(int userId) => messageContext.GetAllFromFollowings(userId);
+        public IEnumerable<IMessage> GetFollowingsMessages(int userId) => _messageContext.GetAllFromFollowings(userId);
 
-        public IEnumerable<IProgression> GetFollowingsProgressions(int userId) => progressionContext.GetAllFromFollowings(userId);
+        public IEnumerable<IProgression> GetFollowingsProgressions(int userId) => _progressionContext.GetAllFromFollowings(userId);
 
-        public int GetFollowersAmount(int userId) => userContext.GetFollowersAmount(userId);
+        public int GetFollowersAmount(int userId) => _userContext.GetFollowersAmount(userId);
 
-        public int GetFollowingAmount(int userId) => userContext.GetFollowingsAmount(userId);
+        public int GetFollowingAmount(int userId) => _userContext.GetFollowingsAmount(userId);
 
-        public IEnumerable<IMessage> GetMessagesByUserId(int userId) => messageContext.GetAllByUserId(userId);
+        public IEnumerable<IMessage> GetMessagesByUserId(int userId) => _messageContext.GetAllByUserId(userId);
 
-        public IEnumerable<IProgression> GetProgressionsByUserId(int userId) => progressionContext.GetAll(userId);
+        public IEnumerable<IProgression> GetProgressionsByUserId(int userId) => _progressionContext.GetAll(userId);
 
-        public List<string> GetAllQuestions() => userContext.GetAllQuestions();
-        public int GetQuestionId(string question) => userContext.GetQuestionId(question);
+        public List<string> GetAllQuestions() => _userContext.GetAllQuestions();
+
+        public int GetQuestionId(string question) => _userContext.GetQuestionId(question);
+
+        public bool IsFollowing(int userId, int followerId) => _userContext.DoIFollowUser(userId, followerId);
+
+        public bool Follow(int userId, int followerId) => _userContext.FollowUser(userId, followerId);
+
+        public bool Unfollow(int userId, int followerId) => _userContext.UnfollowUser(userId, followerId);
     }
 }

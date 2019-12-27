@@ -22,7 +22,7 @@
     <link href="~/css/cardgroupshadow.css" rel="stylesheet" />
     <link href="~/css/alertify.min.css" rel="stylesheet" />
 </head>
-@{ 
+@{
     IUserLogic userLogic = LogicFactory.CreateUserLogic();
     var currentUser = userLogic.GetUser(User.Identity.Name);
 }
@@ -33,12 +33,20 @@
             <div class="text-center box">
                 <img class="rounded-circle" src="@Url.Content(ViewData["profilepic"].ToString())" style="width: 150px;max-width: 100%;">
                 <h3 class="name">@currentUser.Firstname @currentUser.Lastname</h3>
-                <p class="title" style="font-size: 12px;">@ViewData["followers"] FOLLOWERS | @TempData["followings"] FOLLOWING</p>
+                @if (ViewData["followings"] == null)
+                {
+                    ViewData["followings"] = 0;
+                }
+                @if (ViewData["followers"] == null)
+                {
+                    ViewData["followers"] = 0;
+                }
+                <p class="title" style="font-size: 12px;">@ViewData["followers"] FOLLOWERS | @ViewData["followings"] FOLLOWING</p>
             </div>
             <div>
                 <ul class="list-group text-center border rounded-0 shadow-sm">
                     <li class="list-group-item"><a asp-action="Index" asp-controller="User">Home</a></li>
-                    <li class="list-group-item"><a href="#">Profile</a></li>
+                    <li class="list-group-item"><a href="@Url.Action("UserProfile", "User", new { userId = currentUser.Id})">Profile</a></li>
                     <li class="list-group-item"><a asp-action="ProgressionIndex" asp-controller="User">Progressions</a></li>
                     <li class="list-group-item"><a href="#">Agenda</a></li>
                     <li class="list-group-item"><a href="#">Settings</a></li>
@@ -48,6 +56,12 @@
         </div>
         @RenderBody()
         <div class="col rightcol" style="max-width: 25%;">
+            <form asp-controller="User" asp-action="SearchUser">
+                <div class="form-group">
+                    <input name="searchInput" placeholder="&#64;username" type="search" />
+                    <button class="btn btn-outline-info" type="submit">Search</button>
+                </div>
+            </form>
             <div class="text-center">
                 <strong>Hall of Fame</strong>
                 <ul class="list-group text-center">

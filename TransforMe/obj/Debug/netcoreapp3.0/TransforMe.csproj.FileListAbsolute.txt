@@ -119,8 +119,6 @@ C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Ra
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_VisitorLayout.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\AddActivity.cshtml.g.cs
-C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\AddMessage.cshtml.g.cs
-C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\AddProgression.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\Index.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\ProgressionIndex.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs

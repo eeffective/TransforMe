@@ -1,17 +1,44 @@
 ﻿@model TransforMe.ViewModels.ProfileViewModel
-
+@using TransforMe.Interface.Logics;
 @{
     ViewData["Title"] = "UserProfile";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
+    IUserLogic userLogic = TransforMe.BLLFactory.LogicFactory.CreateUserLogic();
+}
+
+@{
+    TempData["userId"] = Model.Id;
+
+    var currentUser = userLogic.GetUser(User.Identity.Name);
+    string followbtn;
+
+    if (userLogic.IsFollowing(userLogic.GetUser(Model.Username).Id, currentUser.Id))
+    {
+        followbtn = "UNFOLLOW";
+    }
+    else
+    {
+        followbtn = "FOLLOW";
+    }
 }
 
 <div class="col midcol" style="width: auto;">
-    <div class="text-center box">
-        <img class="rounded-circle" src="@Url.Content(ViewData["profileProfilepic"].ToString())" style="width: 150px;max-width: 100%;">
-        <h3 class="name">@ViewData["profilefirstname"] @ViewData["profilelastname"]</h3>
-        <p class="title" style="font-size: 12px;">@ViewData["profilefollowers"] FOLLOWERS | @ViewData["profilefollowing"] FOLLOWING</p>
-        <div class="btn-group" role="group"><button class="btn btn-primary" type="button">Follow</button><button class="btn btn-primary" type="button">Like&nbsp;</button></div>
-    </div>
+    <form asp-action="UserProfile">
+        <div class="text-center box">
+            <img class="rounded-circle" src="@Url.Content(Model.ProfilePicture.ToString())" style="width: 150px;max-width: 100%;">
+            <h3 class="name">@Model.Firstname @Model.Lastname</h3>
+            <p class="title" style="font-size: 12px;">@Model.Followers FOLLOWERS | @Model.Following FOLLOWING</p>
+            @if (currentUser.Id != Model.Id)
+            {
+                <div class="btn-group" role="group">
+                    <button asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, followerId = currentUser.Id })'" class="btn btn-primary" type="submit">@followbtn.ToString()</button>
+                    <button class="btn btn-primary" type="button">LIKE&nbsp;</button>
+                </div>
+            }
+
+        </div>
+    </form>
+
     <div>
         <ul class="nav nav-tabs" style="width:100%">
             <li class="nav-item" style="width:50%;"><a class="nav-link active text-center" role="tab" data-toggle="tab" href="#tab-1" style="min-width: 300px;">Messages</a></li>

@@ -17,5 +17,7 @@ namespace TransforMe.Interface.Contexts
         List<string> GetAllQuestions();
         bool DoIFollowUser(int userId, int followerId);
         int GetQuestionId(string question);
+        bool FollowUser(int userId, int followerId);
+        bool UnfollowUser(int userId, int followerId);
     }
 }

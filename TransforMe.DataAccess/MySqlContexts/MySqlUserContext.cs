@@ -176,6 +176,7 @@ namespace TransforMe.DataAccess
                 {
                     return dataReader.GetInt32("followings");
                 }
+                conn.Close();
                 return -1;
             }
         }
@@ -213,9 +214,10 @@ namespace TransforMe.DataAccess
 
                 if (dataReader.Read())
                 {
-                    return dataReader.GetInt32("followings") > 0;
+                    return dataReader.GetInt32("isFollowing") > 0;
 
                 }
+                conn.Close();
                 return false;
             }
         }
@@ -235,7 +237,38 @@ namespace TransforMe.DataAccess
                     int id = Convert.ToInt32(dataReader["id"]);
                     return id;
                 }
+                conn.Close();
                 return -1;
+            }
+        }
+
+        public bool FollowUser(int userId, int followerId)
+        {
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO user_follower (`user_id`, `follower_id`) VALUES ({userId}, {followerId});", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                return true;
+            }
+        }
+
+        public bool UnfollowUser(int userId, int followerId)
+        {
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM user_follower WHERE user_id = {userId} AND follower_id = {followerId}", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                return true;
             }
         }
     }
