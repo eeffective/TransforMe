@@ -32,7 +32,17 @@ namespace TransforMe.DataAccess
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM messages WHERE messages.id = {id}", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                return true;
+            }
         }
 
         public IMessage Get(int id)

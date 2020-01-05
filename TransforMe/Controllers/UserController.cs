@@ -43,6 +43,7 @@ namespace TransforMe.Controllers
             {
                 viewModel.Messages.Add(new MessageViewModel
                 {
+                    Id = message.Id,
                     Image = "data:image/jpeg;base64," + Convert.ToBase64String(userLogic.GetProfilePicture(message.UserId), 0, userLogic.GetProfilePicture(message.UserId).Length),
                     Username = userLogic.GetUser(message.UserId).Username,
                     Text = message.Text,
@@ -232,6 +233,7 @@ namespace TransforMe.Controllers
             {
                 viewModel.Messages.Add(new MessageViewModel
                 {
+                    Id = message.Id,
                     Image = "data:image/jpeg;base64," + Convert.ToBase64String(userLogic.GetProfilePicture(userId), 0, userLogic.GetProfilePicture(userId).Length),
                     Username = userLogic.GetUser(userId).Username,
                     Text = message.Text,
@@ -266,20 +268,21 @@ namespace TransforMe.Controllers
                 ViewData["followstatus"] = "FOLLOW";
                 if (userLogic.Follow(userId, currentUser.Id))
                 {
-                    TempData["success-feedback"] = "User followed succesfully!";
+                    TempData["success-feedback"] = $"{userLogic.GetUser(userId).Firstname} {userLogic.GetUser(userId).Lastname} followed succesfully!";
                 }
-                return RedirectToAction("UserProfile", "User", new { userId });
             }
             else
             {
                 ViewData["followstatus"] = "UNFOLLOW";
                 userLogic.Unfollow(userId, followerId);
-                TempData["success-feedback"] = "User unfollowed succesfully!";
+                TempData["success-feedback"] = $"{userLogic.GetUser(userId).Firstname} {userLogic.GetUser(userId).Lastname} unfollowed succesfully!";
                 return RedirectToAction("Index", "User");
             }
+            return RedirectToAction("UserProfile", "User", new { userId });
+
         }
 
-        public async Task<IActionResult> SearchUser(string searchInput)
+        public IActionResult SearchUser(string searchInput)
         {
             if (userLogic.GetUser(searchInput.Trim()) != null)
             {
@@ -290,6 +293,19 @@ namespace TransforMe.Controllers
                 TempData["error-mbox"] = $"No user found with the username {searchInput.Trim()}";
                 return RedirectToAction("Index", "User");
             }
+        }
+
+        public IActionResult DeleteMessage(int messageId)
+        {
+            var currentUser = userLogic.GetUser(User.Identity.Name);
+
+            if (userLogic.DeleteMessage(messageId))
+            {
+                return RedirectToAction("UserProfile", "User", new {userId = currentUser.Id});
+            }
+
+            return RedirectToAction("Index", "User");
+
         }
 
         public async Task<IActionResult> SignOut()

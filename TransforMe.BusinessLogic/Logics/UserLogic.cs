@@ -32,6 +32,8 @@ namespace TransforMe.BusinessLogic
             return false;
         }
 
+        public bool DeleteMessage(int messageId) => _messageContext.Delete(messageId);
+
         public bool PostProgression(IProgression progression, int userId)
         {
             if (_progressionContext.Create(progression, userId))

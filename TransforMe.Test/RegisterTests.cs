@@ -48,6 +48,9 @@ namespace TransforMe.Test
 
             Assert.IsTrue(_driver.PageSource.Contains("TestFirstname TestLastname succesfully registered!"));
 
+            //TODO: extra check, die waarschijnlijk niet noodzakelijk is *soon deleted*
+            Assert.AreEqual(_driver.Url , _localRegister);
+
             _driver.Close();
             _driver.Dispose();
         }
