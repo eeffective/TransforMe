@@ -10,14 +10,13 @@ namespace TransforMe.Test
     public class RegisterTests
     {
         private IWebDriver _driver;
-        private Uri _localLogin = new Uri("https://localhost:44384/");
-        private Uri _localRegister = new Uri("https://localhost:44384/Home/Register");
+        private readonly Uri _localLogin = new Uri("https://localhost:44384/");
+        private readonly Uri _localRegister = new Uri("https://localhost:44384/Home/Register");
 
         [TestInitialize]
         public void Setup()
         {
             _driver = new ChromeDriver();
-
             _driver.Navigate().GoToUrl(_localLogin);
             _driver.FindElement(By.Name("noaccount")).Click();
         }
@@ -49,7 +48,7 @@ namespace TransforMe.Test
             Assert.IsTrue(_driver.PageSource.Contains("TestFirstname TestLastname succesfully registered!"));
 
             //TODO: extra check, die waarschijnlijk niet noodzakelijk is *soon deleted*
-            Assert.AreEqual(_driver.Url , _localRegister);
+            Assert.AreEqual(_driver.Url, _localRegister);
 
             _driver.Close();
             _driver.Dispose();

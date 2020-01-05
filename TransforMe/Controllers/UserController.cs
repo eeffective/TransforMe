@@ -74,26 +74,26 @@ namespace TransforMe.Controllers
                 message.Text = text;
             }
 
-            if (message.Text == null)
+            if (message.Text != null && text.Length < 300)
             {
-                TempData["error-mbox"] = "Text input can't be empty!";
-                return RedirectToAction("Index", "User");
+                var currentUser = userLogic.GetUser(User.Identity.Name);
+
+                IMessage newMessage = ModelFactory.CreateMessage();
+                {
+                    newMessage.Text = text;
+                }
+
+                if (userLogic.PostMessage(newMessage, currentUser.Id))
+                {
+                    TempData["success-feedback"] = "Message succesfully added!";
+                    return RedirectToAction("Index", "User");
+                }
             }
 
-            var currentUser = userLogic.GetUser(User.Identity.Name);
+            TempData["error-mbox"] = "Either your input is empty or too long!";
+            return RedirectToAction("Index", "User");
 
-            IMessage newMessage = ModelFactory.CreateMessage();
-            {
-                newMessage.Text = text;
-            }
 
-            if (userLogic.PostMessage(newMessage, currentUser.Id))
-            {
-                TempData["success-feedback"] = "Message succesfully added!";
-                return RedirectToAction("Index", "User");
-            }
-
-            return View(new UserIndexViewModel());
         }
 
         [HttpGet]
@@ -136,36 +136,37 @@ namespace TransforMe.Controllers
                 pvm.Date = date;
             }
 
-            if (picture == null || bodyweight < 0 || date == null)
+            if (picture != null && picture.Length > 0 && bodyweight > 0 && date != null && date < DateTime.Now && date.Year > 2000)
             {
-                TempData["error-feedback"] = "One (if not more) of the required input fields is empty!";
-                return RedirectToAction("ProgressionIndex", "User");
-            }
-
-            IProgression newProgression = ModelFactory.CreateProgression();
-            {
+                IProgression newProgression = ModelFactory.CreateProgression();
                 {
-                    using (var rs = picture.OpenReadStream())
-                    using (var ms = new MemoryStream())
                     {
-                        rs.CopyTo(ms);
-                        newProgression.ProgressPicture = ms.ToArray();
+                        using (var rs = picture.OpenReadStream())
+                        using (var ms = new MemoryStream())
+                        {
+                            rs.CopyTo(ms);
+                            newProgression.ProgressPicture = ms.ToArray();
+                        }
+                        newProgression.Bodyweight = bodyweight;
+                        newProgression.Date = date;
                     }
-                    newProgression.Bodyweight = bodyweight;
-                    newProgression.Date = date;
+                }
+
+                if (userLogic.PostProgression(newProgression, currentUser.Id))
+                {
+                    TempData["success-feedback"] = "Progression successfully added!";
+                    return RedirectToAction("ProgressionIndex", "User");
+                }
+                else
+                {
+                    TempData["error-feedback"] = "Failed to add progressions, something went wrong!";
+                    return RedirectToAction("ProgressionIndex", "User");
                 }
             }
 
-            if (userLogic.PostProgression(newProgression, currentUser.Id))
-            {
-                TempData["success-feedback"] = "Progressions succesfully added!";
-                return RedirectToAction("ProgressionIndex", "User");
-            }
-            else
-            {
-                TempData["error-feedback"] = "Failed to add progressions, something went wrong!";
-                return RedirectToAction("ProgressionIndex", "User");
-            }
+            TempData["error-feedback"] = "Either one (if not more) of the required input fields is empty or the date is not valid!";
+            return RedirectToAction("ProgressionIndex", "User");
+
         }
 
         [HttpGet]
@@ -301,7 +302,7 @@ namespace TransforMe.Controllers
 
             if (userLogic.DeleteMessage(messageId))
             {
-                return RedirectToAction("UserProfile", "User", new {userId = currentUser.Id});
+                return RedirectToAction("UserProfile", "User", new { userId = currentUser.Id });
             }
 
             return RedirectToAction("Index", "User");

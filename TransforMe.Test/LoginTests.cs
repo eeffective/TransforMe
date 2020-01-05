@@ -9,7 +9,7 @@ namespace TransforMe.Test
     public class LoginTests : IDisposable
     {
         private IWebDriver _driver;
-        private Uri _localLogin = new Uri("https://localhost:44384/");
+        private readonly Uri _localLogin = new Uri("https://localhost:44384/");
 
         [TestInitialize]
         public void Setup()
