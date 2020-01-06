@@ -20,7 +20,7 @@
             @if (currentUser.Id != Model.Id)
             {
                 <div class="btn-group" role="group">
-                    <button asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, followerId = currentUser.Id })'" class="btn btn-primary" type="submit">@TempData["followstatus"].ToString()</button>
+                    <button id="followBtn" asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, followerId = currentUser.Id })'" class="btn btn-primary" type="submit">@TempData["followstatus"].ToString()</button>
                     <button class="btn btn-primary" type="button">LIKE&nbsp;</button>
                 </div>
             }

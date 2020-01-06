@@ -85,12 +85,12 @@ namespace TransforMe.Controllers
 
                 if (userLogic.PostMessage(newMessage, currentUser.Id))
                 {
-                    TempData["success-feedback"] = "Message succesfully added!";
+                    TempData["success-feedback"] = "Message successfully added!";
                     return RedirectToAction("Index", "User");
                 }
             }
 
-            TempData["error-mbox"] = "Either your input is empty or too long!";
+            TempData["error-feedback"] = "Either your input is empty or too long!";
             return RedirectToAction("Index", "User");
 
 
@@ -264,36 +264,38 @@ namespace TransforMe.Controllers
             int followerId = currentUser.Id;
             int userId = (int)TempData["userId"];
             ViewData["followstatus"] = null;
+
             if (!userLogic.IsFollowing(userId, followerId))
             {
                 ViewData["followstatus"] = "FOLLOW";
-                if (userLogic.Follow(userId, currentUser.Id))
-                {
-                    TempData["success-feedback"] = $"{userLogic.GetUser(userId).Firstname} {userLogic.GetUser(userId).Lastname} followed succesfully!";
-                }
-            }
-            else
-            {
-                ViewData["followstatus"] = "UNFOLLOW";
-                userLogic.Unfollow(userId, followerId);
-                TempData["success-feedback"] = $"{userLogic.GetUser(userId).Firstname} {userLogic.GetUser(userId).Lastname} unfollowed succesfully!";
+                userLogic.Follow(userId, currentUser.Id);
+                TempData["success-feedback"] = $"{userLogic.GetUser(userId).Firstname} {userLogic.GetUser(userId).Lastname} followed successfully!";
                 return RedirectToAction("Index", "User");
-            }
-            return RedirectToAction("UserProfile", "User", new { userId });
 
+            }
+            ViewData["followstatus"] = "UNFOLLOW";
+            userLogic.Unfollow(userId, followerId);
+            TempData["success-feedback"] = $"{userLogic.GetUser(userId).Firstname} {userLogic.GetUser(userId).Lastname} unfollowed successfully!";
+            return RedirectToAction("Index", "User");
         }
 
         public IActionResult SearchUser(string searchInput)
         {
-            if (userLogic.GetUser(searchInput.Trim()) != null)
+            if (searchInput != null)
             {
-                return RedirectToAction("UserProfile", "User", new { userId = userLogic.GetUser(searchInput).Id });
+                if (userLogic.GetUser(searchInput.Trim()) != null)
+                {
+                    return RedirectToAction("UserProfile", "User", new { userId = userLogic.GetUser(searchInput).Id });
+                }
+                else
+                {
+                    TempData["error-feedback"] = $"No user found with the username {searchInput.Trim()}";
+                    return RedirectToAction("Index", "User");
+                }
             }
-            else
-            {
-                TempData["error-mbox"] = $"No user found with the username {searchInput.Trim()}";
-                return RedirectToAction("Index", "User");
-            }
+            TempData["error-feedback"] = $"No username given, try again!";
+            return RedirectToAction("Index", "User");
+
         }
 
         public IActionResult DeleteMessage(int messageId)
