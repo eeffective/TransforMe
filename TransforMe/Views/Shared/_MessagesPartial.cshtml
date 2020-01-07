@@ -11,8 +11,11 @@
 </a>
 <h1 style="font-size: 20px;padding-top: 2%;">@Model.Username</h1>
 @{
+    string deletemsgbtnid = $"deleteMessage{Model.Id}";
     if (currentUser.Id == userLogic.GetUser(Model.Username).Id)
-    { <button id="deleteMessage" class="float-right btn-danger" style="margin: 1%;">Delete</button>}
+    {
+        <button id="@deletemsgbtnid" class="float-right btn-danger" style="margin: 1%;">Delete</button>
+    }
 }
 <p class="d-xl-flex justify-content-xl-start">@Model.Text</p>
 <small style="padding-right:2%;" class="d-xl-flex justify-content-xl-end">@Model.PostedAt</small>
@@ -25,7 +28,7 @@
     }
 </style>
 <script>
-    document.getElementById('deleteMessage').onclick = function () {
+    document.getElementById('@deletemsgbtnid').onclick = function () {
         alertify.confirm("Are you sure?",
                 function () {
                     location.href = "@Url.Action("DeleteMessage", "User", new {messageId = Model.Id})";

@@ -304,6 +304,7 @@ namespace TransforMe.Controllers
 
             if (userLogic.DeleteMessage(messageId))
             {
+                TempData["success-feedback"] = $"Message has been deleted successfully!";
                 return RedirectToAction("UserProfile", "User", new { userId = currentUser.Id });
             }
 

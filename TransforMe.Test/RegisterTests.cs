@@ -47,8 +47,32 @@ namespace TransforMe.Test
 
             Assert.IsTrue(_driver.PageSource.Contains("TestFirstname TestLastname succesfully registered!"));
 
-            //TODO: extra check, die waarschijnlijk niet noodzakelijk is *soon deleted*
+            //TODO: extra check, not necessary
             Assert.AreEqual(_driver.Url, _localRegister);
+
+            _driver.Close();
+            _driver.Dispose();
+        }
+
+        [TestMethod()]
+        public void New_User_Registration_Failure_Missing_Input()
+        {
+            var securityquestion = _driver.FindElement(By.Name("securityquestion"));
+            var selectElement = new SelectElement(securityquestion);
+
+            // Input for the username is missing
+
+            _driver.FindElement(By.Name("firstname")).SendKeys("TestFirstname");
+            _driver.FindElement(By.Name("lastname")).SendKeys("TestLastname");
+            _driver.FindElement(By.Name("password")).SendKeys("TestPassword");
+            _driver.FindElement(By.Name("confirmpassword")).SendKeys("TestPassword");
+            selectElement.SelectByText("In what city or town was your first job?");
+            _driver.FindElement(By.Name("securityanswer")).SendKeys("TestSecurityAnswer");
+            _driver.FindElement(By.Id("registerbtn")).Click();
+
+            // Assert
+
+            Assert.IsTrue(_driver.PageSource.Contains("Registration failed, check if all inputs are correctly filled & try again!"));
 
             _driver.Close();
             _driver.Dispose();

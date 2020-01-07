@@ -86,7 +86,7 @@ namespace TransforMe.Controllers
             // TODO: Find the error in the if-statement below
             if (!ModelState.IsValid)
             {
-                TempData["error-feedback"] = "Registration failed!";
+                TempData["error-feedback"] = "Registration failed, check if all inputs are correctly filled & try again!";
                 return View(viewModel);
             }
 
