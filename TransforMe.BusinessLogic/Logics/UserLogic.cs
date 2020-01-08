@@ -54,14 +54,14 @@ namespace TransforMe.BusinessLogic
 
         public bool Register(IUser user)
         {
-            //    string defaultProfilePicture = @"~\wwwroot\images\defaultprofilepicture.jpg";
-            //    var imageToByte = File.ReadAllBytes(defaultProfilePicture);
+            string defaultProfilePicture = @"C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\wwwroot\images\defaultprofilepicture.jpg";
+            var imageToByte = File.ReadAllBytes(defaultProfilePicture);
 
-            //user.ProfilePicture = imageToByte;
+            user.ProfilePicture = imageToByte;
             user.ActiveState = 1;
             user.AccountType = "Public";
             user.Role = 1;
-            user.DateOfCreation = DateTime.UtcNow;
+            user.DateOfCreation = DateTime.Now;
             if (_userContext.Create(user))
             {
                 return true;

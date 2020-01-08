@@ -25,6 +25,7 @@ namespace TransforMe.DataAccess
             cmd.Parameters.AddWithValue("@SecurityQuestion", user.SecurityQuestion);
             cmd.Parameters.AddWithValue("@SecurityAnswer", user.SecurityAnswer);
             cmd.Parameters.AddWithValue("@ProfilePicture", user.ProfilePicture);
+            cmd.Parameters.AddWithValue("@DateOfCreation", user.DateOfCreation);
 
             cmd.ExecuteNonQuery();
             conn.Close();
