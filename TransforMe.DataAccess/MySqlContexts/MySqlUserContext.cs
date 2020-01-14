@@ -142,7 +142,23 @@ namespace TransforMe.DataAccess
 
         public bool Update(IUser user)
         {
-            throw new NotImplementedException();
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand($"spUpdateUser", conn);
+                conn.Open();
+                cmd.Parameters.AddWithValue("newpic", user.ProfilePicture);
+                cmd.Parameters.AddWithValue("userId", user.Id);
+                cmd.Parameters.AddWithValue("firstname", user.Firstname);
+                cmd.Parameters.AddWithValue("lastname", user.Lastname);
+                cmd.Parameters.AddWithValue("username", user.Username);
+                cmd.Parameters.AddWithValue("password", user.Password);
+                cmd.CommandType = CommandType.StoredProcedure;
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                return true;
+            }
         }
 
         public int GetFollowersAmount(int userId)
@@ -176,6 +192,25 @@ namespace TransforMe.DataAccess
                 if (dataReader.Read())
                 {
                     return dataReader.GetInt32("followings");
+                }
+                conn.Close();
+                return -1;
+            }
+        }
+
+        public int GetLikesAmount(int userId)
+        {
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) AS likes FROM user_liker WHERE liker_id = '" + userId + "';", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                if (dataReader.Read())
+                {
+                    return dataReader.GetInt32("likes");
                 }
                 conn.Close();
                 return -1;
@@ -230,6 +265,33 @@ namespace TransforMe.DataAccess
             }
         }
 
+        public bool DoILikeUser(int userId, int likerId)
+        {
+            int result = 0;
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand("SELECT COUNT(*) AS alreadyLiked FROM user_liker WHERE user_id = '" + userId + "' and liker_id = '" + likerId + "';", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                MySqlDataReader dataReader = cmd.ExecuteReader();
+
+                while (dataReader.Read())
+                {
+                    result = Convert.ToInt32(dataReader["alreadyLiked"]);
+                }
+                conn.Close();
+            }
+            if (result == 1)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public int GetQuestionId(string question)
         {
             using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
@@ -265,6 +327,21 @@ namespace TransforMe.DataAccess
             }
         }
 
+        public bool LikeUser(int userId, int likerId)
+        {
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand($"INSERT INTO user_liker (`user_id`, `liker_id`) VALUES ({userId}, {likerId});", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                return true;
+            }
+        }
+
         public bool UnfollowUser(int userId, int followerId)
         {
             using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
@@ -278,6 +355,26 @@ namespace TransforMe.DataAccess
 
                 return true;
             }
+        }
+
+        public bool DislikeUser(int userId, int likerId)
+        {
+            using (MySqlConnection conn = MySqlConnectionFactory.CreateConnection())
+            {
+                MySqlCommand cmd = new MySqlCommand($"DELETE FROM user_liker WHERE user_id = {userId} AND liker_id = {likerId}", conn);
+                conn.Open();
+                cmd.CommandType = CommandType.Text;
+
+                cmd.ExecuteNonQuery();
+                conn.Close();
+
+                return true;
+            }
+        }
+
+        public List<IUser> GetTopFive()
+        {
+            throw new NotImplementedException();
         }
     }
 }

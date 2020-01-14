@@ -23,25 +23,21 @@
     <link href="~/css/alertify.min.css" rel="stylesheet" />
 </head>
 @{
-    IUserLogic userLogic = LogicFactory.CreateUserLogic();
-    var currentUser = userLogic.GetUser(User.Identity.Name);
+    IUserLogic _userLogic = LogicFactory.CreateUserLogic();
+    var currentUser = _userLogic.GetUser(User.Identity.Name);
+    int followers = _userLogic.GetFollowersAmount(currentUser.Id);
+    int following = _userLogic.GetFollowingAmount(currentUser.Id);
+    string currentProfilepicture = "data:image/jpeg;base64," + Convert.ToBase64String(_userLogic.GetProfilePicture(currentUser.Id), 0, _userLogic.GetProfilePicture(currentUser.Id).Length);
+
 }
 
 <body class="bodytransforme">
     <div class="row" style="margin-top: 2%;width: 100%;">
         <div class="col leftcol">
             <div class="text-center box">
-                <img class="rounded-circle" src="@Url.Content(ViewData["profilepic"].ToString())" style="width: 150px;max-width: 100%;">
+                <img class="rounded-circle" src="@Url.Content(currentProfilepicture)" style="width: 150px;max-width: 100%;">
                 <h3 class="name">@currentUser.Firstname @currentUser.Lastname</h3>
-                @if (ViewData["followings"] == null)
-                {
-                    ViewData["followings"] = 0;
-                }
-                @if (ViewData["followers"] == null)
-                {
-                    ViewData["followers"] = 0;
-                }
-                <p class="title" style="font-size: 12px;">@ViewData["followers"] FOLLOWERS | @ViewData["followings"] FOLLOWING</p>
+                <p class="title" style="font-size: 12px;">@followers FOLLOWERS | @following FOLLOWING</p>
             </div>
             <div>
                 <ul class="list-group text-center border rounded-0 shadow-sm">
@@ -49,7 +45,7 @@
                     <li class="list-group-item"><a href="@Url.Action("UserProfile", "User", new { userId = currentUser.Id})">Profile</a></li>
                     <li class="list-group-item"><a id="progression" asp-action="ProgressionIndex" asp-controller="User">Progressions</a></li>
                     <li class="list-group-item"><a href="#">Agenda</a></li>
-                    <li class="list-group-item"><a href="#">Settings</a></li>
+                    <li class="list-group-item"><a href="@Url.Action("EditProfile", "User", new { userId = currentUser.Id})">Edit profile</a></li>
                     <li class="list-group-item"><a asp-action="SignOut" asp-controller="User">Sign out</a></li>
                 </ul>
             </div>
@@ -66,12 +62,11 @@
                 <strong>Hall of Fame</strong>
                 <ul class="list-group text-center">
                     <li class="list-group-item d-block">
-                        <a class="d-block" href="#" style="padding-bottom: 2%;">1. username1</a>
-
-                        <a class="d-block" href="#" style="padding-bottom: 2%;">2. username2</a>
-                        <a class="d-block" href="#" style="padding-bottom: 2%;">3. username3</a>
-                        <a class="d-block" href="#" style="padding-bottom: 2%;">4. username4</a>
-                        <a class="d-block" href="#">5. username5</a>
+                        <a class="d-block" href="#" style="padding-bottom: 2%;">COMING SOON</a>
+                        <a class="d-block" href="#" style="padding-bottom: 2%;">COMING SOON</a>
+                        <a class="d-block" href="#" style="padding-bottom: 2%;">COMING SOON</a>
+                        <a class="d-block" href="#" style="padding-bottom: 2%;">COMING SOON</a>
+                        <a class="d-block" href="#">COMING SOON</a>
                     </li>
                 </ul>
             </div>

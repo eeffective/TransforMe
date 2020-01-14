@@ -22,6 +22,9 @@ namespace TransforMe.BusinessLogic
             _progressionContext = ContextFactory.CreateProgressionContext();
             _activityContext = ContextFactory.CreateActivityContext();
         }
+
+        public bool UpdateProfile(IUser user) => _userContext.Update(user);
+
         public bool PostMessage(IMessage message, int userId)
         {
             message.PostedAt = DateTime.Now;
@@ -89,8 +92,14 @@ namespace TransforMe.BusinessLogic
 
         public bool IsFollowing(int userId, int followerId) => _userContext.DoIFollowUser(userId, followerId);
 
+        public bool AlreadyLiked(int userId, int likerId) => _userContext.DoILikeUser(userId, likerId);
+
         public bool Follow(int userId, int followerId) => _userContext.FollowUser(userId, followerId);
 
+        public bool Like(int userId, int likerId) => _userContext.LikeUser(userId, likerId);
+
         public bool Unfollow(int userId, int followerId) => _userContext.UnfollowUser(userId, followerId);
+
+        public bool Dislike(int userId, int dislikerId) => _userContext.DislikeUser(userId, dislikerId);
     }
 }

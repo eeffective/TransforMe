@@ -1,0 +1,54 @@
+﻿@model TransforMe.ViewModels.ProfileViewModel
+@{
+    ViewData["Title"] = "Edit profile";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+
+<div class="col midcol" style="width: auto;">
+    <div style="margin-top: 15%;">
+        <h1>Edit profile</h1>
+        <form asp-controller="User" asp-action="EditProfile" enctype="multipart/form-data" style="margin-top: 2%;">
+            <div class="form-group profilepicform">
+                <img id="uploadImage" class="editprofilepic" src="@Url.Content(ViewData["profilepic"].ToString())">
+                <input name="picture" id="outImage" onChange="preview_2(this);" type="file" class="picinput" value="">
+            </div>
+            <div class="form-group" style="width: 50%;">
+                <input name="firstname" class="form-control username-input" type="text" placeholder="@Model.Firstname" value="@Model.Firstname">
+            </div>
+            <div class="form-group" style="width: 50%;">
+                <input name="lastname" class="form-control username-input" type="text" placeholder="@Model.Lastname" value="@Model.Lastname">
+            </div>
+            <div class="form-group" style="width: 50%;">
+                <input name="username" class="form-control username-input" type="text" placeholder="@Model.Username" value="@Model.Username">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="password" placeholder="New password" value="@Model.Password" style="width: 50%; ">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="repeatpassword" placeholder="Repeat password" value="@Model.Password" style="width: 50%;">
+            </div>
+            <div class="form-group">
+                <button class="btn btn-primary btn-block" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    var outImage = "uploadImage";
+    function preview_2(obj) {
+        if (FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(obj.files[0]);
+            reader.onload = function (e) {
+                var image = new Image();
+                image.src = e.target.result;
+                image.onload = function () {
+                    document.getElementById(outImage).src = image.src;
+                };
+            }
+        }
+
+    }
+</script>

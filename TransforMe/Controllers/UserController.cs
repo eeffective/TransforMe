@@ -7,7 +7,9 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 using TransforMe.BLLFactory;
+using TransforMe.BusinessLogic.Models;
 using TransforMe.Interface;
 using TransforMe.Interface.Logics;
 using TransforMe.ViewModels;
@@ -22,14 +24,7 @@ namespace TransforMe.Controllers
         public IActionResult Index(int userId)
         {
             var currentUser = _userLogic.GetUser(User.Identity.Name);
-            string currentProfilepicture = "data:image/jpeg;base64," + Convert.ToBase64String(_userLogic.GetProfilePicture(currentUser.Id), 0, _userLogic.GetProfilePicture(currentUser.Id).Length);
             var followingsMessages = _userLogic.GetFollowingsMessages(currentUser.Id).ToList();
-
-            ViewData["firstname"] = currentUser.Firstname;
-            ViewData["lastname"] = currentUser.Lastname;
-            ViewData["profilepic"] = currentProfilepicture;
-            ViewData["followers"] = _userLogic.GetFollowersAmount(currentUser.Id);
-            ViewData["followings"] = _userLogic.GetFollowingAmount(currentUser.Id);
 
             UserIndexViewModel viewModel = new UserIndexViewModel()
             {
@@ -47,8 +42,7 @@ namespace TransforMe.Controllers
                     Image = "data:image/jpeg;base64," + Convert.ToBase64String(_userLogic.GetProfilePicture(message.UserId), 0, _userLogic.GetProfilePicture(message.UserId).Length),
                     Username = _userLogic.GetUser(message.UserId).Username,
                     Text = message.Text,
-                    PostedAt = message.PostedAt,
-
+                    PostedAt = message.PostedAt
                 });
             }
 
@@ -101,15 +95,6 @@ namespace TransforMe.Controllers
         public IActionResult ProgressionIndex()
         {
             var currentUser = _userLogic.GetUser(User.Identity.Name);
-            string currentProfilepicture = "data:image/jpeg;base64," + Convert.ToBase64String(_userLogic.GetProfilePicture(currentUser.Id), 0, _userLogic.GetProfilePicture(currentUser.Id).Length);
-
-            ViewData["firstname"] = currentUser.Firstname;
-            ViewData["lastname"] = currentUser.Lastname;
-            ViewData["profilepic"] = currentProfilepicture;
-            ViewData["followers"] = _userLogic.GetFollowersAmount(currentUser.Id);
-            ViewData["followings"] = _userLogic.GetFollowingAmount(currentUser.Id);
-
-
             List<ProgressionViewModel> pvm = new List<ProgressionViewModel>();
 
             foreach (IProgression progression in _userLogic.GetProgressionsByUserId(currentUser.Id))
@@ -120,7 +105,7 @@ namespace TransforMe.Controllers
                     Bodyweight = progression.Bodyweight,
                     Date = progression.Date,
                     Username = _userLogic.GetUser(currentUser.Id).Username,
-                    Id = _userLogic.GetUser(progression.UserId).Id
+                    Id = _userLogic.GetUser(currentUser.Id).Id
                 });
             }
 
@@ -132,7 +117,7 @@ namespace TransforMe.Controllers
         {
             var currentUser = _userLogic.GetUser(User.Identity.Name);
 
-            ProgressionViewModel pvm = new ProgressionViewModel();
+            var pvm = new ProgressionViewModel();
             {
                 pvm.Bodyweight = bodyweight;
                 pvm.Date = date;
@@ -205,13 +190,7 @@ namespace TransforMe.Controllers
         public IActionResult UserProfile(int userId)
         {
             var currentUser = _userLogic.GetUser(User.Identity.Name);
-            string currentProfilepicture = "data:image/jpeg;base64," + Convert.ToBase64String(_userLogic.GetProfilePicture(currentUser.Id), 0, _userLogic.GetProfilePicture(currentUser.Id).Length);
             string profileProfilePicture = "data:image/jpeg;base64," + Convert.ToBase64String(_userLogic.GetProfilePicture(userId), 0, _userLogic.GetProfilePicture(userId).Length);
-            ViewData["firstname"] = currentUser.Firstname;
-            ViewData["lastname"] = currentUser.Lastname;
-            ViewData["profilepic"] = currentProfilepicture;
-            ViewData["followers"] = _userLogic.GetFollowersAmount(currentUser.Id);
-            ViewData["followings"] = _userLogic.GetFollowingAmount(currentUser.Id);
             TempData["followstatus"] = "FOLLOW";
 
             ProfileViewModel viewModel = new ProfileViewModel();
@@ -284,21 +263,19 @@ namespace TransforMe.Controllers
 
         public IActionResult SearchUser(string searchInput)
         {
-            if (searchInput != null)
+            if (searchInput == null)
             {
-                if (_userLogic.GetUser(searchInput.Trim()) != null)
-                {
-                    return RedirectToAction("UserProfile", "User", new { userId = _userLogic.GetUser(searchInput).Id });
-                }
-                else
-                {
-                    TempData["error-feedback"] = $"No user found with the username {searchInput.Trim()}";
-                    return RedirectToAction("Index", "User");
-                }
+                TempData["error-feedback"] = $"No username given, try again!";
+                return RedirectToAction("Index", "User");
             }
-            TempData["error-feedback"] = $"No username given, try again!";
-            return RedirectToAction("Index", "User");
 
+            if (_userLogic.GetUser(searchInput.Trim()) == null)
+            {
+                TempData["error-feedback"] = $"No user found with the username {searchInput.Trim()}";
+                return RedirectToAction("Index", "User");
+            }
+
+            return RedirectToAction("UserProfile", "User", new { userId = _userLogic.GetUser(searchInput).Id });
         }
 
         public IActionResult DeleteMessage(int messageId)
@@ -314,6 +291,7 @@ namespace TransforMe.Controllers
             return RedirectToAction("Index", "User");
 
         }
+
         public IActionResult DeleteProgression(int progressionId)
         {
             // TODO: Delete progression must be implemented still
@@ -327,9 +305,50 @@ namespace TransforMe.Controllers
 
         }
 
-        public IActionResult UserSettings()
+        [HttpGet]
+        public IActionResult EditProfile()
         {
-            return View();
+            var currentUser = _userLogic.GetUser(User.Identity.Name);
+            var pvm = new ProfileViewModel
+            {
+                Firstname = currentUser.Firstname,
+                Lastname = currentUser.Lastname,
+                Username = currentUser.Username,
+                Password = currentUser.Password
+            };
+            return View(pvm);
+        }
+
+        [HttpPost]
+        public IActionResult EditProfile(IFormFile picture, string username, string firstname, string lastname, string password)
+        {
+            var currentUser = _userLogic.GetUser(User.Identity.Name);
+
+            if (picture != null)
+            {
+                using (var rs = picture.OpenReadStream())
+                using (var ms = new MemoryStream())
+                {
+                    rs.CopyTo(ms);
+                    currentUser.ProfilePicture = ms.ToArray();
+                }
+            }
+
+            currentUser.Username = username;
+            currentUser.Firstname = firstname;
+            currentUser.Lastname = lastname;
+            currentUser.Password = password;
+
+            if (_userLogic.UpdateProfile(currentUser))
+            {
+                TempData["success-feedback"] = $"Profile updated successfully!";
+                return RedirectToAction("UserProfile", "User", new { userId = currentUser.Id });
+            }
+
+            TempData["error-feedback"] = $"No changes made";
+            return RedirectToAction("UserProfile", "User", new { userId = currentUser.Id });
+
+
         }
 
         public async Task<IActionResult> SignOut()
@@ -337,5 +356,74 @@ namespace TransforMe.Controllers
             await HttpContext.SignOutAsync();
             return RedirectToAction("Login", "Home");
         }
+
+        // TODO, *IF TIME LEFT*
+        //public IActionResult EditUser(string username, IFormFile profilepic)
+        //{
+        //    var currentUser = _userLogic.GetUser(User.Identity.Name);
+
+        //    var user = ModelFactory.CreateUser();
+        //    {
+        //        user.Id = currentUser.Id;
+        //        user.ProfilePicture = currentUser.ProfilePicture;
+        //        user.Username = currentUser.Username;
+        //    }
+
+        //    if (username != null && profilepic == null)
+        //    {
+        //        user.Username = username;
+        //        _userLogic.UpdateProfile(user);
+        //    }
+
+        //    if (profilepic != null && username == null)
+        //    {
+        //        using (var rs = profilepic.OpenReadStream())
+        //        using (var ms = new MemoryStream())
+        //        {
+        //            rs.CopyTo(ms);
+        //            user.ProfilePicture = ms.ToArray();
+        //            _userLogic.UpdateProfile(user);
+        //        }
+        //    }
+
+        //    if (username == null || profilepic == null) return;
+        //    {
+        //        user.Username = username;
+        //        using (var rs = profilepic.OpenReadStream())
+        //        using (var ms = new MemoryStream())
+        //        {
+        //            rs.CopyTo(ms);
+        //            user.ProfilePicture = ms.ToArray();
+        //            _userLogic.UpdateProfile(user);
+        //        }
+        //        _userLogic.UpdateProfile(user);
+        //    }
+        //}
+        //public IActionResult UserProfile(int userId, int likerId)
+        //{
+        //    var currentUser = _userLogic.GetUser(User.Identity.Name);
+        //    int followerId = currentUser.Id;
+        //    userId = (int)TempData["userId"];
+
+
+        //    ViewData["likestatus"] = null;
+
+        //    if (!_userLogic.IsFollowing(userId, followerId))
+        //    {
+        //        ViewData["likestatus"] = "LIKE";
+        //        _userLogic.Like(userId, currentUser.Id);
+        //        TempData["success-feedback"] = $"{_userLogic.GetUser(userId).Firstname} {_userLogic.GetUser(userId).Lastname} liked successfully!";
+        //        return RedirectToAction("Index", "User");
+        //    }
+
+        //    if (!_userLogic.AlreadyLiked(userId, followerId))
+        //    {
+
+        //    }
+        //    ViewData["likestatus"] = "DISLIKE";
+        //    _userLogic.Dislike(userId, followerId);
+        //    TempData["success-feedback"] = $"{_userLogic.GetUser(userId).Firstname} {_userLogic.GetUser(userId).Lastname} disliked successfully!";
+        //    return RedirectToAction("Index", "User");
+        //}
     }
 }

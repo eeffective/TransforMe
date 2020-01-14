@@ -12,7 +12,7 @@
 }
 
 <div class="col midcol" style="width: auto;">
-    <form asp-action="UserProfile">
+    <form asp-controller="User">
         <div class="text-center box">
             <img class="rounded-circle" src="@Url.Content(Model.ProfilePicture.ToString())" style="width: 150px;max-width: 100%;">
             <h3 class="name">@Model.Firstname @Model.Lastname</h3>
@@ -21,7 +21,7 @@
             {
                 <div class="btn-group" role="group">
                     <button id="followBtn" asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, followerId = currentUser.Id })'" class="btn btn-primary" type="submit">@TempData["followstatus"].ToString()</button>
-                    <button class="btn btn-primary" type="button">LIKE&nbsp;</button>
+                   @* <button id="likeBtn" asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, likerId = currentUser.Id })'" class="btn btn-primary" type="submit">@TempData["likestatus"].ToString()</button>*@
                 </div>
             }
 

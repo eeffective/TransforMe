@@ -8,6 +8,7 @@ namespace TransforMe.Interface.Logics
     {
         bool Register(IUser user);
         bool ValidateLogin(string username, string password);
+        bool UpdateProfile(IUser user);
         bool PostMessage(IMessage message, int userId);
         bool DeleteMessage(int messageId);
         bool DeleteProgression(int progressionId);
@@ -26,7 +27,10 @@ namespace TransforMe.Interface.Logics
         List<string> GetAllQuestions();
         int GetQuestionId(string question);
         bool IsFollowing(int userId, int followerId);
+        bool AlreadyLiked(int userId, int likerId);
         bool Follow(int userId, int followerId);
+        bool Like(int userId, int likerId);
         bool Unfollow(int userId, int followerId);
+        bool Dislike(int userId, int dislikerId);
     }
 }
