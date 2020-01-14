@@ -1,11 +1,35 @@
-﻿@model TransforMe.ViewModels.ProgressionViewModel
+﻿@using TransforMe.Interface.Logics
+@model TransforMe.ViewModels.ProgressionViewModel
 
+@{
+    IUserLogic userLogic = TransforMe.BLLFactory.LogicFactory.CreateUserLogic();
+    var currentUser = userLogic.GetUser(User.Identity.Name);
 
+}
 <div class="card mb-4 box-shadow rounded-0" style="width: 250px;height: auto;margin-top: 2%;display: inline-block;">
     <img class="card-img-top w-100 d-block rounded-0" style="height:250px;width:auto" src="@Url.Content(Model.ProgressPicture)">
     <div class="card-body">
         <h4 class="card-title">@Model.Username</h4>
         <h6 class="text-muted card-subtitle mb-2">Bodyweight : @Model.Bodyweight KG</h6>
         <h6 class="text-muted card-subtitle mb-2">@Model.Date.ToShortDateString()</h6>
+        @{
+            string deleteprgid = $"deleteMessage{Model.Id}";
+            if (currentUser.Id == userLogic.GetUser(Model.Username).Id)
+            {
+                <button id="@deleteprgid" class="float-right btn-danger" style="margin: 1%;">Delete</button>
+            }
+        }
     </div>
 </div>
+
+<script>
+    document.getElementById('@deleteprgid').onclick = function () {
+        alertify.confirm("Are you sure?",
+                function () {
+                    location.href = "@Url.Action("DeleteProgression", "User", new {progressionId = Model.Id})";
+                }),
+            function() {
+                alertify.error('Cancelled');
+            }
+    }
+</script>

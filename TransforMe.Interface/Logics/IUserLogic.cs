@@ -10,6 +10,7 @@ namespace TransforMe.Interface.Logics
         bool ValidateLogin(string username, string password);
         bool PostMessage(IMessage message, int userId);
         bool DeleteMessage(int messageId);
+        bool DeleteProgression(int progressionId);
         bool PostProgression(IProgression progression, int userId);
         bool PlanActivity(IActivity activity, int userId);
         IEnumerable<IMessage> GetFollowingsMessages(int userId);

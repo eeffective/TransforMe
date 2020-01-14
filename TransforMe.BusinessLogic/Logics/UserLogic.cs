@@ -34,23 +34,11 @@ namespace TransforMe.BusinessLogic
 
         public bool DeleteMessage(int messageId) => _messageContext.Delete(messageId);
 
-        public bool PostProgression(IProgression progression, int userId)
-        {
-            if (_progressionContext.Create(progression, userId))
-            {
-                return true;
-            }
-            return false;
-        }
+        public bool DeleteProgression(int progressionId) => _progressionContext.Delete(progressionId);
 
-        public bool PlanActivity(IActivity activity, int userId)
-        {
-            if (_activityContext.Create(activity, userId))
-            {
-                return true;
-            }
-            return false;
-        }
+        public bool PostProgression(IProgression progression, int userId) => _progressionContext.Create(progression, userId);
+
+        public bool PlanActivity(IActivity activity, int userId) => _activityContext.Create(activity, userId);
 
         public bool Register(IUser user)
         {
@@ -72,11 +60,7 @@ namespace TransforMe.BusinessLogic
         public bool ValidateLogin(string username, string password)
         {
             IUser user = _userContext.Get(username);
-            if (user != null && user.Username == username && user.Password == password)
-            {
-                return true;
-            }
-            return false;
+            return user != null && user.Username == username && user.Password == password;
         }
 
         public int GetRole(string username) => _userContext.Get(username).Role;

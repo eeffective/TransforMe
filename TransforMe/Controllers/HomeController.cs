@@ -16,7 +16,7 @@ namespace TransforMe.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUserLogic userLogic = LogicFactory.CreateUserLogic();
+        private readonly IUserLogic _userLogic = LogicFactory.CreateUserLogic();
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -37,9 +37,9 @@ namespace TransforMe.Controllers
                 return View();
             }
 
-            if (userLogic.ValidateLogin(viewModel.Username, viewModel.Password))
+            if (_userLogic.ValidateLogin(viewModel.Username, viewModel.Password))
             {
-                var role = userLogic.GetRole(viewModel.Username);
+                var role = _userLogic.GetRole(viewModel.Username);
                 var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Name, viewModel.Username),
@@ -68,7 +68,7 @@ namespace TransforMe.Controllers
         [HttpGet]
         public IActionResult Register()
         {
-            ViewBag.SecurityQuestions = userLogic.GetAllQuestions();
+            ViewBag.SecurityQuestions = _userLogic.GetAllQuestions();
 
             return View();
         }
@@ -76,7 +76,7 @@ namespace TransforMe.Controllers
         [HttpPost]
         public IActionResult Register(RegisterViewModel viewModel)
         {
-            ViewBag.SecurityQuestions = userLogic.GetAllQuestions();
+            ViewBag.SecurityQuestions = _userLogic.GetAllQuestions();
 
             if (viewModel.Firstname == viewModel.Lastname)
             {
@@ -96,11 +96,11 @@ namespace TransforMe.Controllers
                 newUser.Lastname = viewModel.Lastname;
                 newUser.Username = viewModel.Username;
                 newUser.Password = viewModel.Password;
-                newUser.SecurityQuestion = userLogic.GetQuestionId(viewModel.SecurityQuestion);
+                newUser.SecurityQuestion = _userLogic.GetQuestionId(viewModel.SecurityQuestion);
                 newUser.SecurityAnswer = viewModel.SecurityAnswer;
             }
 
-            if (userLogic.Register(newUser))
+            if (_userLogic.Register(newUser))
             {
                 TempData["success-feedback"] = $"{viewModel.Firstname} {viewModel.Lastname} succesfully registered!";
                 return RedirectToAction("Login", "Home");

@@ -11,6 +11,7 @@ namespace TransforMe.ViewModels
         public string Username { get; set; }
         [Display(Name = "Upload your picture here please.")]
         [Required(ErrorMessage = "There is no picture selected.")]
+        public int Id { get; set; }
         public string ProgressPicture { get; set; }
 
         [Display(Name = "What was your current bodyweight?")]
