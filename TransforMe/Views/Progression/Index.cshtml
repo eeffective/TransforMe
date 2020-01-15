@@ -1,0 +1,61 @@
+﻿@model IEnumerable<TransforMe.ViewModels.ProgressionViewModel>
+@{
+    ViewData["Title"] = "ProgressionIndex";
+    Layout = "~/Views/Shared/_UserLayout.cshtml";
+}
+
+<div class="col midcol" style="width: auto;">
+    <form asp-action="ProgressionIndex" enctype="multipart/form-data">
+        <div class="form-group" style="height:400px;width:auto">
+            <img id="uploadImage" style="max-width:100%; max-height:100%" src="~/images/upload.png">
+        </div>
+        <input onChange="preview_2(this);" id="outImage" name="picture" type="file" style="padding-bottom: 1%;">
+        <input id="bodyweight" name="bodyweight" class="form-control" style="width: 50%;padding-top: 3px;" type='number' placeholder="Bodyweight (KG)">
+        <input id="date" name="date" class="form-control" style="width: 50%; padding-bottom:1%;" type="date">
+        <div class="form-group"><button id="progressionBtn" class="btn btn-primary" type="submit">Add progression</button></div>
+    </form>
+    @foreach (var item in Model)
+    {
+        Html.RenderPartial("_ProgressionsPartial", item);
+    }
+</div>
+
+
+@section Scripts {
+    <script>
+        @if (TempData["success-feedback"] != null) {
+            @:alertify.success('@TempData["success-feedback"]');
+        }
+        @if (TempData["error-feedback"] != null)
+        {
+            @:alertify.error('@TempData["error-feedback"]');
+        }
+        @if (TempData["error-mbox"] != null)
+        {
+            @:var alert = alertify.alert('@TempData["error-mbox"]');
+            @:alert.set('Label', 'Got it!');
+            @:alert.show();
+        }
+
+
+
+    </script>
+}
+
+<script>
+    var outImage = "uploadImage";
+    function preview_2(obj) {
+        if (FileReader) {
+            var reader = new FileReader();
+            reader.readAsDataURL(obj.files[0]);
+            reader.onload = function (e) {
+                var image = new Image();
+                image.src = e.target.result;
+                image.onload = function () {
+                    document.getElementById(outImage).src = image.src;
+                };
+            }
+        }
+
+    }
+</script>
