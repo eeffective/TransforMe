@@ -174,3 +174,7 @@ a:hover {
     width: 150%;
     float: left;
 }
+
+#registerpic {
+    background-image: url(images/registerpicture.jpg)
+}

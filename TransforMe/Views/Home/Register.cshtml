@@ -4,45 +4,49 @@
     Layout = "~/Views/Shared/_VisitorLayout.cshtml";
 }
 
-<div class="form-container">
-    <form method="post" asp-action="Register" asp-controller="Home">
-        <h2 class="text-center">TransforMe - Sign up</h2>
-        <div class="form-group">
-            <input name="firstname"  asp-for="Firstname" class="form-control username-input" type="text" placeholder="First name">
-        </div>
-        <div class="form-group">
-            <input name="lastname"  asp-for="Lastname" class="form-control username-input" type="text" placeholder="Last name">
-        </div>
-        <div class="form-group">
-            <input name="username"  asp-for="Username" class="form-control username-input" type="text" placeholder="Username">
-        </div>
-        <div class="form-group">
-            <input name="password"  asp-for="Password" class="form-control" type="password" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <input name="confirmpassword"  class="form-control" type="password" name="confirmpassword" placeholder="Repeat password">
-        </div>
-        <div class="form-group">
-            <select name="securityquestion" asp-for="SecurityQuestion" required class="form-control">
-                <optgroup label="Security questions">
-                    @{int val = 1;
-                        foreach (var question in ViewBag.SecurityQuestions)
-                        {
-                            <option id="@val" value="@question">@question</option>
-                            val++;
+<div class="register-photo" style="background-color: rgba(241,247,252,0);padding-top: 10%;">
+    <div class="form-container">
+        <div id="registerpic" class="image-holder" style="background-image: url('@Url.Content("~/images/registerpicture.jpg")');"></div>
+        <form method="post" asp-action="Register">
+            <h2 class="text-center"><b>TransforMe - Register</b></h2>
+            <div class="form-group">
+                <input asp-for="Firstname" class="form-control username-input" type="text" name="firstname" placeholder="First name">
+            </div>
+            <div class="form-group">
+                <input asp-for="Lastname" class="form-control username-input" type="text" name="lastname" placeholder="Last name">
+            </div>
+            <div class="form-group">
+                <input asp-for="Username" class="form-control username-input" type="text" name="username" placeholder="Username">
+            </div>
+            <div class="form-group">
+                <input asp-for="Password" class="form-control" type="password" name="password" placeholder="Password">
+            </div>
+            <div class="form-group">
+                <input class="form-control" type="password" name="confirmpassword" placeholder="Repeat password">
+                <span class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <select name="securityquestion" asp-for="SecurityQuestion" required class="form-control">
+                    <optgroup label="Security questions">
+                        @{int val = 1;
+                            foreach (var question in ViewBag.SecurityQuestions)
+                            {
+                                <option id="@val" value="@question">@question</option>
+                                val++;
+                            }
                         }
-                    }
-                </optgroup>
-            </select>
-        </div>
-        <div class="form-group">
-            <input name="securityanswer"  asp-for="SecurityAnswer" class="form-control username-input" placeholder="Security answer">
-        </div>
-        <div asp-validation-summary="ModelOnly"></div>
-        <div class="form-group">
-            <button id="registerbtn" class="btn btn-primary btn-block" type="submit">Sign up</button>
-        </div><a class="already" asp-controller="Home" asp-action="Login">Already have an account? Sign in here!</a>
-    </form>
+                    </optgroup>
+                </select>
+            </div>
+            <div class="form-group">
+                <input name="securityanswer" asp-for="SecurityAnswer" class="form-control username-input" placeholder="Security answer">
+            </div>
+            <div asp-validation-summary="ModelOnly"></div>
+            <div class="form-group">
+                <button id="registerbtn" class="btn btn-primary btn-block" type="submit">Sign up</button>
+            </div><a class="already" asp-controller="Home" asp-action="Login">Already have an account? Sign in here!</a>
+        </form>
+    </div>
 </div>
 
 @section Scripts {
