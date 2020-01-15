@@ -18,7 +18,12 @@ namespace TransforMe.Controllers
 {
     public class UserController : Controller
     {
-        private readonly IUserLogic _userLogic = LogicFactory.CreateUserLogic();
+        private readonly IUserLogic _userLogic;
+
+        public UserController()
+        {
+            _userLogic = LogicFactory.CreateUserLogic();
+        }
 
         [HttpGet]
         public IActionResult Index(int userId)
@@ -326,12 +331,10 @@ namespace TransforMe.Controllers
 
             if (picture != null)
             {
-                using (var rs = picture.OpenReadStream())
-                using (var ms = new MemoryStream())
-                {
-                    rs.CopyTo(ms);
-                    currentUser.ProfilePicture = ms.ToArray();
-                }
+                using var rs = picture.OpenReadStream();
+                using var ms = new MemoryStream();
+                rs.CopyTo(ms);
+                currentUser.ProfilePicture = ms.ToArray();
             }
 
             currentUser.Username = username;

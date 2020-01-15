@@ -1,0 +1,11 @@
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\bin\Release\netcoreapp3.0\TransforMe.DataAccess.deps.json
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\bin\Release\netcoreapp3.0\TransforMe.DataAccess.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\bin\Release\netcoreapp3.0\TransforMe.DataAccess.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\bin\Release\netcoreapp3.0\TransforMe.Interface.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\bin\Release\netcoreapp3.0\TransforMe.Interface.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\obj\Release\netcoreapp3.0\TransforMe.DataAccess.csprojAssemblyReference.cache
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\obj\Release\netcoreapp3.0\TransforMe.DataAccess.AssemblyInfoInputs.cache
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\obj\Release\netcoreapp3.0\TransforMe.DataAccess.AssemblyInfo.cs
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\obj\Release\netcoreapp3.0\TransforMe.DataAccess.csproj.CopyComplete
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\obj\Release\netcoreapp3.0\TransforMe.DataAccess.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.DataAccess\obj\Release\netcoreapp3.0\TransforMe.DataAccess.pdb

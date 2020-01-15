@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using TransforMe.BLLFactory;
@@ -16,10 +17,11 @@ namespace TransforMe.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        private readonly IUserLogic _userLogic = LogicFactory.CreateUserLogic();
+        private readonly IUserLogic _userLogic;
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
+            _userLogic = LogicFactory.CreateUserLogic();
         }
 
         [HttpGet]
@@ -57,6 +59,7 @@ namespace TransforMe.Controllers
                     case 2:
                         return RedirectToAction("Index", "Admin");
                 }
+
             }
             else
             {
@@ -102,7 +105,7 @@ namespace TransforMe.Controllers
 
             if (_userLogic.Register(newUser))
             {
-                TempData["success-feedback"] = $"{viewModel.Firstname} {viewModel.Lastname} succesfully registered!";
+                TempData["success-feedback"] = $"{viewModel.Firstname} {viewModel.Lastname} successfully registered!";
                 return RedirectToAction("Login", "Home");
             }
             else

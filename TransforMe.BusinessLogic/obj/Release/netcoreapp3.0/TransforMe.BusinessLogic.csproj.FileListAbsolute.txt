@@ -1,0 +1,15 @@
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.BusinessLogic.deps.json
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.BusinessLogic.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.BusinessLogic.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.DALFactory.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.DataAccess.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.Interface.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.DALFactory.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.Interface.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\bin\Release\netcoreapp3.0\TransforMe.DataAccess.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\obj\Release\netcoreapp3.0\TransforMe.BusinessLogic.csprojAssemblyReference.cache
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\obj\Release\netcoreapp3.0\TransforMe.BusinessLogic.AssemblyInfoInputs.cache
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\obj\Release\netcoreapp3.0\TransforMe.BusinessLogic.AssemblyInfo.cs
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\obj\Release\netcoreapp3.0\TransforMe.BusinessLogic.csproj.CopyComplete
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\obj\Release\netcoreapp3.0\TransforMe.BusinessLogic.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BusinessLogic\obj\Release\netcoreapp3.0\TransforMe.BusinessLogic.pdb

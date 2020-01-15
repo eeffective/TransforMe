@@ -1,7 +1,11 @@
-﻿@model TransforMe.ViewModels.ProfileViewModel
+﻿@using TransforMe.BLLFactory
+@model TransforMe.ViewModels.ProfileViewModel
 @{
     ViewData["Title"] = "Edit profile";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
+    var _userLogic = LogicFactory.CreateUserLogic();
+    var currentUser = _userLogic.GetUser(User.Identity.Name);
+    string currentProfilepicture = "data:image/jpeg;base64," + Convert.ToBase64String(_userLogic.GetProfilePicture(currentUser.Id), 0, _userLogic.GetProfilePicture(currentUser.Id).Length);
 }
 
 
@@ -10,8 +14,8 @@
         <h1>Edit profile</h1>
         <form asp-controller="User" asp-action="EditProfile" enctype="multipart/form-data" style="margin-top: 2%;">
             <div class="form-group profilepicform">
-                <img id="uploadImage" class="editprofilepic" src="@Url.Content(ViewData["profilepic"].ToString())">
-                <input name="picture" id="outImage" onChange="preview_2(this);" type="file" class="picinput" value="">
+                <img id="uploadImage" class="editprofilepic" src="">
+                <input name="picture" id="outImage" onChange="preview_2(this);" type="file" class="picinput" value="@currentProfilepicture">
             </div>
             <div class="form-group" style="width: 50%;">
                 <input name="firstname" class="form-control username-input" type="text" placeholder="@Model.Firstname" value="@Model.Firstname">

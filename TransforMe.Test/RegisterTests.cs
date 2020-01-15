@@ -45,7 +45,7 @@ namespace TransforMe.Test
 
             // Assert
 
-            Assert.IsTrue(_driver.PageSource.Contains("TestFirstname TestLastname succesfully registered!"));
+            Assert.IsTrue(_driver.PageSource.Contains("TestFirstname TestLastname successfully registered!"));
 
             //TODO: extra check, not necessary
             Assert.AreEqual(_driver.Url, _localRegister);

@@ -1,0 +1,17 @@
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.BLLFactory.deps.json
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.BLLFactory.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.BLLFactory.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.BusinessLogic.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.DALFactory.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.DataAccess.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.Interface.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.BusinessLogic.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.DALFactory.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.DataAccess.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\bin\Release\netcoreapp3.0\TransforMe.Interface.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\obj\Release\netcoreapp3.0\TransforMe.BLLFactory.csprojAssemblyReference.cache
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\obj\Release\netcoreapp3.0\TransforMe.BLLFactory.AssemblyInfoInputs.cache
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\obj\Release\netcoreapp3.0\TransforMe.BLLFactory.AssemblyInfo.cs
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\obj\Release\netcoreapp3.0\TransforMe.BLLFactory.csproj.CopyComplete
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\obj\Release\netcoreapp3.0\TransforMe.BLLFactory.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.BLLFactory\obj\Release\netcoreapp3.0\TransforMe.BLLFactory.pdb

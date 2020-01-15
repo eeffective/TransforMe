@@ -1,0 +1,7 @@
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\bin\Release\netcoreapp3.0\TransforMe.Interface.deps.json
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\bin\Release\netcoreapp3.0\TransforMe.Interface.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\bin\Release\netcoreapp3.0\TransforMe.Interface.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netcoreapp3.0\TransforMe.Interface.AssemblyInfoInputs.cache
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netcoreapp3.0\TransforMe.Interface.AssemblyInfo.cs
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netcoreapp3.0\TransforMe.Interface.dll
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netcoreapp3.0\TransforMe.Interface.pdb
