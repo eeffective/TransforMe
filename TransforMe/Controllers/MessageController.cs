@@ -20,7 +20,7 @@ namespace TransforMe.Controllers
 
         public IActionResult Index(string text)
         {
-            MessageViewModel message = new MessageViewModel();
+            var message = new MessageViewModel();
             {
                 message.Text = text;
             }
@@ -29,7 +29,7 @@ namespace TransforMe.Controllers
             {
                 var currentUser = _userLogic.GetUser(User.Identity.Name);
 
-                IMessage newMessage = ModelFactory.CreateMessage();
+                var newMessage = ModelFactory.CreateMessage();
                 {
                     newMessage.Text = text;
                 }
