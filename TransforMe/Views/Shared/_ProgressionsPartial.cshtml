@@ -26,10 +26,16 @@
     document.getElementById('@deleteprgid').onclick = function () {
         alertify.confirm("Are you sure?",
                 function () {
-                    location.href = "@Url.Action("DeleteProgression", "User", new {progressionId = Model.Id})";
+                    location.href = "@Url.Action("DeleteProgression", "Progression", new {progressionId = Model.Id})";
                 }),
             function() {
                 alertify.error('Cancelled');
             }
     }
 </script>
+
+<style>
+    .card-img-top:hover {
+        cursor: pointer;
+    }
+</style>

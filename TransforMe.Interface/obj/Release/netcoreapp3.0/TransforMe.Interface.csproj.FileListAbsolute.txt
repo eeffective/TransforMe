@@ -5,3 +5,4 @@ C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netc
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netcoreapp3.0\TransforMe.Interface.AssemblyInfo.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netcoreapp3.0\TransforMe.Interface.dll
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netcoreapp3.0\TransforMe.Interface.pdb
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe.Interface\obj\Release\netcoreapp3.0\TransforMe.Interface.csprojAssemblyReference.cache

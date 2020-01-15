@@ -43,7 +43,7 @@
                 <ul class="list-group text-center border rounded-0 shadow-sm">
                     <li class="list-group-item"><a asp-action="Index" asp-controller="User">Home</a></li>
                     <li class="list-group-item"><a href="@Url.Action("UserProfile", "User", new { userId = currentUser.Id})">Profile</a></li>
-                    <li class="list-group-item"><a id="progression" asp-action="ProgressionIndex" asp-controller="User">Progressions</a></li>
+                    <li class="list-group-item"><a id="progression" asp-action="Index" asp-controller="Progression">Progressions</a></li>
                     <li class="list-group-item"><a href="#">Agenda</a></li>
                     <li class="list-group-item"><a href="@Url.Action("EditProfile", "User", new { userId = currentUser.Id})">Edit profile</a></li>
                     <li class="list-group-item"><a asp-action="SignOut" asp-controller="User">Sign out</a></li>

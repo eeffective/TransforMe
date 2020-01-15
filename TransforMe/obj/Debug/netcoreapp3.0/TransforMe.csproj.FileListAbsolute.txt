@@ -118,9 +118,7 @@ C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Ra
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_UserLayout.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_ValidationScriptsPartial.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_VisitorLayout.cshtml.g.cs
-C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\AddActivity.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\Index.cshtml.g.cs
-C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\ProgressionIndex.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\_ViewImports.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\_ViewStart.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\TransforMe.RazorTargetAssemblyInfo.cache
@@ -220,3 +218,6 @@ C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\bin\Debug\netcoreapp3.0\ru
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\TransforMe.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\UserProfile.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\User\EditProfile.cshtml.g.cs
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Activity\Index.cshtml.g.cs
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Message\Index.cshtml.g.cs
+C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Progression\Index.cshtml.g.cs

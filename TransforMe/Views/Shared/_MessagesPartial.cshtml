@@ -32,7 +32,7 @@
     document.getElementById('@deletemsgbtnid').onclick = function () {
         alertify.confirm("Are you sure?",
                 function () {
-                    location.href = "@Url.Action("DeleteMessage", "User", new {messageId = Model.Id})";
+                    location.href = "@Url.Action("DeleteMessage", "Message", new {messageId = Model.Id})";
                 }),
             function() {
                 alertify.error('Cancelled');
