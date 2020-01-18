@@ -92,6 +92,9 @@
 .visitorbody {
     width: 100%;
     height: 100vh;
+    background-image: url('../images/background.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 @media (max-width:767px) {
@@ -212,6 +215,7 @@ a:hover {
     background-size: cover;
     max-height: 100px;
     min-height: 100px;
+    background-image: url('../images/background.jpg');
     width: 100%;
     min-width: 100vh;
 }
@@ -309,6 +313,7 @@ a:hover {
 .text-left {
     margin-bottom: 1%;
     min-height: 16%;
+    background-color: white;
 }
 
 .nav-tabs {
@@ -398,4 +403,8 @@ a:hover {
 
 .card-img-top:hover {
     cursor: pointer;
+}
+
+.custombtn {
+    background-color: white;
 }
