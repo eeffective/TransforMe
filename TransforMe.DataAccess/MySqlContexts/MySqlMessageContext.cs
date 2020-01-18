@@ -74,6 +74,7 @@ namespace TransforMe.DataAccess
                         Id = Convert.ToInt32(dataReader["id"]),
                         Text = dataReader["text"].ToString(),
                         PostedAt = (DateTime)dataReader["postedat"],
+                        UserId = Convert.ToInt32(dataReader["user_id"])
                     };
                     messagesToReturn.Add(message);
                 }

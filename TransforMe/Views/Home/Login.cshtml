@@ -2,12 +2,13 @@
 
 @{
     Layout = "~/Views/Shared/_VisitorLayout.cshtml";
+    ViewData["Title"] = "TransforMe - Login";
 }
 
 
-<div class="register-photo" style="background-color: rgba(241,247,252,0);padding-top: 10%;">
+<div class="register-photo">
     <div class="form-container">
-        <div class="image-holder" style="background-image: url(&quot;assets/img/meghan-holmes-buWcS7G1_28-unsplash.jpg&quot;);"></div>
+        <div style="background-image: url(@Url.Content("~/images/loginpicture.jpg"))" class="image-holder"></div>
         <form method="post" asp-action="Login">
             <h2 class="text-center">TransforMe - Sign in</h2>
             <div class="form-group">

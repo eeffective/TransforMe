@@ -74,7 +74,8 @@ namespace TransforMe.DataAccess
                         Id = Convert.ToInt32(dataReader["id"]),
                         ProgressPicture = dataReader["progresspicture"] as byte[],
                         Bodyweight = Convert.ToDecimal(dataReader["bodyweight"]),
-                        Date = (DateTime)dataReader["date"]
+                        Date = (DateTime)dataReader["date"],
+                        UserId = Convert.ToInt32(dataReader["user_id"])
                     };
                     progressionsToReturn.Add(progression);
                 }

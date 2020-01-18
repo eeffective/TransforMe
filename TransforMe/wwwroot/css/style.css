@@ -6,12 +6,13 @@
 .register-photo {
     background: #f1f7fc;
     padding: 80px 0;
+    background-color: rgba(241, 247, 252, 0);
+    padding-top: 10%;
 }
 
     .register-photo .image-holder {
         display: table-cell;
         width: auto;
-        background: url(../../assets/img/meeting.jpg);
         background-size: cover;
     }
 
@@ -348,6 +349,25 @@ a:hover {
 #prgimg {
     height: 250px;
     width: auto;
+}
+
+#uploadImage {
+    max-width: 100%;
+    max-height: 100%;
+}
+
+#outImage {
+    padding-bottom: 1%;
+}
+
+#bodyweight {
+    width: 50%;
+    padding-top: 3px;
+}
+
+#date {
+    width: 50%;
+    padding-bottom: 1%;
 }
 
 .prgpartial {

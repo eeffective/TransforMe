@@ -2,9 +2,10 @@
 
 @{
     Layout = "~/Views/Shared/_VisitorLayout.cshtml";
+    ViewData["Title"] = "TransforMe - Registration"; 
 }
 
-<div class="register-photo" style="background-color: rgba(241,247,252,0);padding-top: 10%;">
+<div class="register-photo">
     <div class="form-container">
         <div id="registerpic" class="image-holder" style="background-image: url('@Url.Content("~/images/registerpicture.jpg")');"></div>
         <form method="post" asp-action="Register">

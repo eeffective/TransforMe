@@ -1,17 +1,17 @@
 ﻿@model IEnumerable<TransforMe.ViewModels.ProgressionViewModel>
 @{
-    ViewData["Title"] = "ProgressionIndex";
+    ViewData["Title"] = "Progressions";
     Layout = "~/Views/Shared/_UserLayout.cshtml";
 }
 
-<div class="col midcol" style="width: auto;">
+<div class="col midcol">
     <form asp-action="ProgressionIndex" enctype="multipart/form-data">
         <div class="form-group prgindex">
-            <img id="uploadImage" style="max-width:100%; max-height:100%" src="~/images/upload.png">
+            <img id="uploadImage" src="~/images/upload.png">
         </div>
-        <input onChange="preview_2(this);" id="outImage" name="picture" type="file" style="padding-bottom: 1%;">
-        <input id="bodyweight" name="bodyweight" class="form-control" style="width: 50%;padding-top: 3px;" type='number' placeholder="Bodyweight (KG)">
-        <input id="date" name="date" class="form-control" style="width: 50%; padding-bottom:1%;" type="date">
+        <input onChange="preview_2(this);" id="outImage" name="picture" type="file">
+        <input id="bodyweight" name="bodyweight" class="form-control" type="number" placeholder="Bodyweight (KG)">
+        <input id="date" name="date" class="form-control" type="date">
         <div class="form-group"><button id="progressionBtn" class="btn btn-primary" type="submit">Add progression</button></div>
     </form>
     @foreach (var item in Model)
@@ -38,17 +38,12 @@
         }
 
 
-
-    </script>
-}
-
-<script>
-    var outImage = "uploadImage";
-    function preview_2(obj) {
-        if (FileReader) {
+        var outImage = "uploadImage";
+            function preview_2(obj) {
+            if (FileReader) {
             var reader = new FileReader();
             reader.readAsDataURL(obj.files[0]);
-            reader.onload = function (e) {
+            reader.onload = function (e) { 
                 var image = new Image();
                 image.src = e.target.result;
                 image.onload = function () {
@@ -58,4 +53,6 @@
         }
 
     }
-</script>
+    </script>
+}
+

@@ -30,6 +30,18 @@ namespace TransforMe.Controllers
         {
             var currentUser = _userLogic.GetUser(User.Identity.Name);
             var followingsMessages = _userLogic.GetFollowingsMessages(currentUser.Id).ToList();
+            var followingProgressions = _userLogic.GetFollowingsProgressions(currentUser.Id);
+            var myMessages = _userLogic.GetMessagesByUserId(currentUser.Id);
+            var myProgressions = _userLogic.GetProgressionsByUserId(currentUser.Id);
+
+            var allMessages = new List<IMessage>();
+            var allProgressions = new List<IProgression>();
+
+            allMessages.AddRange(followingsMessages);
+            allMessages.AddRange(myMessages);
+
+            allProgressions.AddRange(followingProgressions);
+            allProgressions.AddRange(myProgressions);
 
             UserIndexViewModel viewModel = new UserIndexViewModel()
             {
@@ -37,9 +49,8 @@ namespace TransforMe.Controllers
                 Progressions = new List<ProgressionViewModel>()
             };
 
-            followingsMessages.Find(message => message.UserId == userId);
 
-            foreach (IMessage message in followingsMessages)
+            foreach (IMessage message in allMessages.OrderByDescending(m => m.PostedAt).ToList())
             {
                 viewModel.Messages.Add(new MessageViewModel
                 {
@@ -51,7 +62,7 @@ namespace TransforMe.Controllers
                 });
             }
 
-            foreach (IProgression progression in _userLogic.GetFollowingsProgressions(currentUser.Id))
+            foreach (IProgression progression in allProgressions.OrderByDescending(p => p.Date).ToList())
             {
                 viewModel.Progressions.Add(new ProgressionViewModel
                 {
