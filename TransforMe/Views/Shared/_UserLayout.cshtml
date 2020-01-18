@@ -1,7 +1,7 @@
 ﻿@using TransforMe.Interface.Logics;
 @using TransforMe.BLLFactory;
 <!DOCTYPE html>
-<html >
+<html>
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
@@ -32,7 +32,6 @@
                     <li class="list-group-item"><a asp-action="Index" asp-controller="User">Home</a></li>
                     <li class="list-group-item"><a href="@Url.Action("UserProfile", "User", new { userId = currentUser.Id})">Profile</a></li>
                     <li class="list-group-item"><a id="progression" asp-action="Index" asp-controller="Progression">Progressions</a></li>
-                    <li class="list-group-item"><a href="#">Agenda</a></li>
                     <li class="list-group-item"><a href="@Url.Action("EditProfile", "User", new { userId = currentUser.Id})">Edit profile</a></li>
                     <li class="list-group-item"><a asp-action="SignOut" asp-controller="User">Sign out</a></li>
                 </ul>
