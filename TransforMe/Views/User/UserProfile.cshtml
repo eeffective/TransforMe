@@ -11,17 +11,17 @@
     var currentUser = userLogic.GetUser(User.Identity.Name);
 }
 
-<div class="col midcol" style="width: auto;">
+<div class="col midcol">
     <form asp-controller="User">
         <div class="text-center box">
-            <img class="rounded-circle" src="@Url.Content(Model.ProfilePicture.ToString())" style="width: 150px;max-width: 100%;">
+            <img class="rounded-circle" src="@Url.Content(Model.ProfilePicture.ToString())">
             <h3 class="name">@Model.Firstname @Model.Lastname</h3>
-            <p class="title" style="font-size: 12px;">@Model.Followers FOLLOWERS | @Model.Following FOLLOWING</p>
+            <p class="title">@Model.Followers FOLLOWERS | @Model.Following FOLLOWING</p>
             @if (currentUser.Id != Model.Id)
             {
                 <div class="btn-group" role="group">
                     <button id="followBtn" asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, followerId = currentUser.Id })'" class="btn btn-primary" type="submit">@TempData["followstatus"].ToString()</button>
-                   @* <button id="likeBtn" asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, likerId = currentUser.Id })'" class="btn btn-primary" type="submit">@TempData["likestatus"].ToString()</button>*@
+                    @* <button id="likeBtn" asp-action="UserProfile" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id, likerId = currentUser.Id })'" class="btn btn-primary" type="submit">@TempData["likestatus"].ToString()</button>*@
                 </div>
             }
 
@@ -29,14 +29,14 @@
     </form>
 
     <div>
-        <ul class="nav nav-tabs" style="width:100%">
-            <li class="nav-item" style="width:50%;"><a class="nav-link active text-center" role="tab" data-toggle="tab" href="#tab-1" style="min-width: 300px;">Messages</a></li>
-            <li class="nav-item" style="width:50%;"><a class="nav-link text-center" role="tab" data-toggle="tab" href="#tab-2" style="min-width: 370px;">Progressions</a></li>
+        <ul class="nav nav-tabs">
+            <li class="nav-item"><a class="nav-link active text-center msgtab" role="tab" data-toggle="tab" href="#tab-1">Messages</a></li>
+            <li class="nav-item"><a class="nav-link text-center prgtab" role="tab" data-toggle="tab" href="#tab-2">Progressions</a></li>
         </ul>
-        <div style="border-left:1px solid; border-right:1px solid; border-bottom:1px solid; border-color:#DEE2E6">
+        <div class="interaction-content">
             <div class="tab-content">
                 <div class="tab-pane active" role="tabpanel" id="tab-1">
-                    <div class="text-left" style="margin-bottom: 1%;min-height: 16%;">
+                    <div class="text-left">
                         @foreach (var item in Model.Messages)
                         {
                             Html.RenderPartial("_MessagesPartial", item);

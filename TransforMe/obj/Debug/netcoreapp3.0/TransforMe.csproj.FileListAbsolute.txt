@@ -111,7 +111,6 @@ C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Ra
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Home\Register.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\Error.cshtml.g.cs
-C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_AddMessage.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_Layout.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_MessagesPartial.cshtml.g.cs
 C:\Users\efali\Documents\GitHub\TransforMe\TransforMe\obj\Debug\netcoreapp3.0\Razor\Views\Shared\_ProgressionsPartial.cshtml.g.cs

@@ -9,21 +9,21 @@
 }
 
 
-<div class="col midcol" style="width: auto;">
-    <div style="margin-top: 15%;">
+<div class="col midcol">
+    <div class="form-holder">
         <h1>Edit profile</h1>
-        <form asp-controller="User" asp-action="EditProfile" enctype="multipart/form-data" style="margin-top: 2%;">
+        <form class="edituser" asp-controller="User" asp-action="EditProfile" enctype="multipart/form-data">
             <div class="form-group profilepicform">
-                <img id="uploadImage" class="editprofilepic" src="">
-                <input name="picture" id="outImage" onChange="preview_2(this);" type="file" class="picinput" value="@currentProfilepicture">
+                <img id="uploadImage" class="editprofilepic" src="@Url.Content(currentProfilepicture)">
+                <input name="picture" id="outImage" onChange="preview_2(this);" type="file" class="picinput" value="@currentProfilepicture.ToString()">
             </div>
-            <div class="form-group" style="width: 50%;">
+            <div class="form-group names">
                 <input name="firstname" class="form-control username-input" type="text" placeholder="@Model.Firstname" value="@Model.Firstname">
             </div>
-            <div class="form-group" style="width: 50%;">
+            <div class="form-group names">
                 <input name="lastname" class="form-control username-input" type="text" placeholder="@Model.Lastname" value="@Model.Lastname">
             </div>
-            <div class="form-group" style="width: 50%;">
+            <div class="form-group names">
                 <input name="username" class="form-control username-input" type="text" placeholder="@Model.Username" value="@Model.Username">
             </div>
             <div class="form-group">

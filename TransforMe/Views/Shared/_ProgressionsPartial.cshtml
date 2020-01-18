@@ -6,8 +6,8 @@
     var currentUser = userLogic.GetUser(User.Identity.Name);
 
 }
-<div class="card mb-4 box-shadow rounded-0" style="width: 250px;height: auto;margin-top: 2%;display: inline-block;">
-    <img class="card-img-top w-100 d-block rounded-0" style="height:250px;width:auto" src="@Url.Content(Model.ProgressPicture)" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id })'">
+<div class="card mb-4 box-shadow rounded-0 prgpartial">
+    <img id="prgimg" class="card-img-top w-100 d-block rounded-0" src="@Url.Content(Model.ProgressPicture)" onclick="location.href='@Url.Action("UserProfile", "User", new { userId = userLogic.GetUser(Model.Username).Id })'">
     <div class="card-body">
         <h4 class="card-title">@Model.Username</h4>
         <h6 class="text-muted card-subtitle mb-2">Bodyweight : @Model.Bodyweight KG</h6>
@@ -16,7 +16,7 @@
             string deleteprgid = $"deleteMessage{Model.Id}";
             if (currentUser.Id == userLogic.GetUser(Model.Username).Id)
             {
-                <button id="@deleteprgid" class="float-right btn-danger" style="margin: 1%;">Delete</button>
+                <button id="@deleteprgid" class="float-right btn-danger msgdltbtn">Delete</button>
             }
         }
     </div>
@@ -33,9 +33,3 @@
             }
     }
 </script>
-
-<style>
-    .card-img-top:hover {
-        cursor: pointer;
-    }
-</style>

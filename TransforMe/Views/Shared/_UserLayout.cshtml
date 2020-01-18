@@ -8,19 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
     <title>Home - TransforMe</title>
     <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
-    <link rel="stylesheet" href="assets/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Arbutus+Slab">
-    <link href="~/assets/css/Contact-Form-Clean.css" rel="stylesheet" />
-    <link href="~/assets/css/Login-Form-Dark.css" rel="stylesheet" />
-    <link href="~/assets/css/Map-Clean.css" rel="stylesheet" />
-    <link href="~/assets/css/Navigation-Clean.css" rel="stylesheet" />
-    <link href="~/assets/css/News-Cards.css" rel="stylesheet" />
-    <link href="~/assets/css/Registration-Form-with-Photo.css" rel="stylesheet" />
-    <link href="~/assets/css/Team-Boxed.css" rel="stylesheet" />
-    <link href="~/assets/css/untitled.css" rel="stylesheet" />
-    <link href="~/css/cardgroupshadow.css" rel="stylesheet" />
     <link href="~/css/alertify.min.css" rel="stylesheet" />
+    <link href="~/css/style.css" rel="stylesheet" />
 </head>
 @{
     IUserLogic _userLogic = LogicFactory.CreateUserLogic();
@@ -32,12 +21,12 @@
 }
 
 <body class="bodytransforme">
-    <div class="row" style="margin-top: 2%;width: 100%;">
+    <div class="row">
         <div class="col leftcol">
             <div class="text-center box">
-                <img class="rounded-circle" src="@Url.Content(currentProfilepicture)" style="width: 150px;max-width: 100%;">
+                <img class="rounded-circle" src="@Url.Content(currentProfilepicture)">
                 <h3 class="name">@currentUser.Firstname @currentUser.Lastname</h3>
-                <p class="title" style="font-size: 12px;">@followers FOLLOWERS | @following FOLLOWING</p>
+                <p class="title">@followers FOLLOWERS | @following FOLLOWING</p>
             </div>
             <div>
                 <ul class="list-group text-center border rounded-0 shadow-sm">
@@ -51,7 +40,7 @@
             </div>
         </div>
         @RenderBody()
-        <div class="col rightcol" style="max-width: 25%;">
+        <div class="col rightcol">
             <form asp-controller="User" asp-action="SearchUser">
                 <div class="form-group">
                     <input name="searchInput" placeholder="&#64;username" type="search" />
@@ -62,10 +51,10 @@
                 <strong>Hall of Fame</strong>
                 <ul class="list-group text-center">
                     <li class="list-group-item d-block">
-                        <a class="d-block" href="#" style="padding-bottom: 2%;">COMING SOON</a>
-                        <a class="d-block" href="#" style="padding-bottom: 2%;">COMING SOON</a>
-                        <a class="d-block" href="#" style="padding-bottom: 2%;">COMING SOON</a>
-                        <a class="d-block" href="#" style="padding-bottom: 2%;">COMING SOON</a>
+                        <a class="d-block" href="#">COMING SOON</a>
+                        <a class="d-block" href="#">COMING SOON</a>
+                        <a class="d-block" href="#">COMING SOON</a>
+                        <a class="d-block" href="#">COMING SOON</a>
                         <a class="d-block" href="#">COMING SOON</a>
                     </li>
                 </ul>
