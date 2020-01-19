@@ -13,7 +13,7 @@
         <h6 class="text-muted card-subtitle mb-2">Bodyweight : @Model.Bodyweight KG</h6>
         <h6 class="text-muted card-subtitle mb-2">@Model.Date.ToShortDateString()</h6>
         @{
-            string deleteprgid = $"deleteMessage{Model.Id}";
+            string deleteprgid = $"deleteProgression{Model.Id}";
             if (currentUser.Id == userLogic.GetUser(Model.Username).Id)
             {
                 <button id="@deleteprgid" class="float-right btn-danger msgdltbtn">Delete</button>

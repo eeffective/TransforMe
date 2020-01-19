@@ -64,7 +64,7 @@ namespace TransforMe.Controllers
                     Bodyweight = progression.Bodyweight,
                     Date = progression.Date,
                     Username = _userLogic.GetUser(progression.UserId).Username,
-                    Id = _userLogic.GetUser(progression.UserId).Id
+                    Id = progression.Id,
                 });
             }
 
