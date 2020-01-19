@@ -28,11 +28,7 @@ namespace TransforMe.BusinessLogic
         public bool PostMessage(IMessage message, int userId)
         {
             message.PostedAt = DateTime.Now;
-            if (_messageContext.Create(message, userId))
-            {
-                return true;
-            }
-            return false;
+            return _messageContext.Create(message, userId);
         }
 
         public bool DeleteMessage(int messageId) => _messageContext.Delete(messageId);
@@ -53,16 +49,12 @@ namespace TransforMe.BusinessLogic
             user.AccountType = "Public";
             user.Role = 1;
             user.DateOfCreation = DateTime.Now;
-            if (_userContext.Create(user))
-            {
-                return true;
-            }
-            return false;
+            return _userContext.Create(user);
         }
 
         public bool ValidateLogin(string username, string password)
         {
-            IUser user = _userContext.Get(username);
+            var user = _userContext.Get(username);
             return user != null && user.Username == username && user.Password == password;
         }
 

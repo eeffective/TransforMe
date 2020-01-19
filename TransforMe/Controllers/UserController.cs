@@ -29,19 +29,13 @@ namespace TransforMe.Controllers
         public IActionResult Index(int userId)
         {
             var currentUser = _userLogic.GetUser(User.Identity.Name);
-            var followingsMessages = _userLogic.GetFollowingsMessages(currentUser.Id).ToList();
-            var followingProgressions = _userLogic.GetFollowingsProgressions(currentUser.Id);
-            var myMessages = _userLogic.GetMessagesByUserId(currentUser.Id);
-            var myProgressions = _userLogic.GetProgressionsByUserId(currentUser.Id);
 
-            var allMessages = new List<IMessage>();
-            var allProgressions = new List<IProgression>();
+            var allMessages = _userLogic.GetFollowingsMessages(currentUser.Id).ToList();
+            allMessages.AddRange(_userLogic.GetMessagesByUserId(currentUser.Id));
 
-            allMessages.AddRange(followingsMessages);
-            allMessages.AddRange(myMessages);
+            var allProgressions = _userLogic.GetFollowingsProgressions(currentUser.Id).ToList();
+            allProgressions.AddRange(_userLogic.GetProgressionsByUserId(currentUser.Id));
 
-            allProgressions.AddRange(followingProgressions);
-            allProgressions.AddRange(myProgressions);
 
             UserIndexViewModel viewModel = new UserIndexViewModel()
             {
